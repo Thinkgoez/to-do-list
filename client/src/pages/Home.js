@@ -4,7 +4,7 @@ import Form from '../components/Form';
 import Projects from '../components/Projects';
 import { Loader } from '../components/Loader';
 import { connect } from 'react-redux';
-import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/firebaseReducer';
+import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/projectsHandler/projectsReducer';
 
 const Home = ({ projects, addProject, setCurrentProject, loading, removeProject, userID, ...props }) => {
     useEffect(() => {

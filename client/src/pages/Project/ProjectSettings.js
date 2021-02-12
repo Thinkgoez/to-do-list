@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { removeProject, addUserToProject, setNewSettings } from '../../redux/firebaseReducer';
+import { removeProject, addUserToProject, setNewSettings } from '../../redux/projectsHandler/projectsReducer';
 
 
 const SettingsForm = (props) => {

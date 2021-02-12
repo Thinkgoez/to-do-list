@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Form from '../../components/Form';
 import { Loader } from '../../components/Loader';
 import { connect } from 'react-redux';
-import { addNote, fetchNotes, removeNote, removeProject, onChangeCompleteNote } from '../../redux/firebaseReducer';
+import { addNote, fetchNotes, removeNote, removeProject, onChangeCompleteNote } from '../../redux/projectsHandler/projectsReducer';
 import { Notes } from '../../components/Notes';
 import { NavLink, Redirect } from 'react-router-dom';
 

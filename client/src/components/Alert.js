@@ -2,7 +2,7 @@
 import *as React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { hide } from '../redux/alertReducer';
+import { hide } from '../redux/AlertHandler/alertReducer';
 
 type MapStateToProps = {
     visible: boolean,

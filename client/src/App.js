@@ -8,33 +8,12 @@ import { Navbar } from './components/Navbar';
 import Alert from './components/Alert';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
-import { setUserID, clearData, signOut, createUser, signIn } from './redux/firebaseReducer';
+import { setUserID, clearData, signOut, createUser, signIn } from './redux/projectsHandler/projectsReducer';
 import ProjectInfo from './pages/Project/ProjectInfo';
 import ProjectSettings from './pages/Project/ProjectSettings';
 import UserInfo from './pages/auth/UserInfo';
 
-interface StateProps {
-    user: {
-        uid: string
-    },
-    error: string | null,
-}
-
-interface DispatchProps {
-    setUserID: (id: string | null) => {},
-    signOut: () => {},
-    clearData: () => {},
-    createUser: (email:string, password:string) => {},
-    signIn: (email:string, password:string) => {},
-}
-
-//   interface OwnProps {
-//     backgroundColor: string
-//   }
-
-type Props = StateProps & DispatchProps // & OwnProps
-
-const App = ({ signOut, ...props }: Props) => {
+const App = ({ signOut, ...props }) => {
     useEffect(() => {
         if (props.user) {
             props.setUserID(props.user.uid)
@@ -69,9 +48,21 @@ const App = ({ signOut, ...props }: Props) => {
     );
 }
 
-const mapStateToProps = (state: RootStateOrAny) => ({
+App.propTypes = {
+    user: {
+        uid: string
+    },
+    error: string | null,
+    setUserID: (id: string | null) => {},
+    signOut: () => {},
+    clearData: () => {},
+    createUser: (email:string, password:string) => {},
+    signIn: (email:string, password:string) => {},
+}
+
+const mapStateToProps = (state) => ({
     user: state.authUser.state,
     error: state.something.error
 })
 
-export default connect<StateProps, DispatchProps>(mapStateToProps, { setUserID, clearData, signOut, createUser, signIn })(App)
+export default connect(mapStateToProps, { setUserID, clearData, signOut, createUser, signIn })(App)
