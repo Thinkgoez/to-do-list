@@ -1,14 +1,21 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { alertReducer } from './AlertHandler/alertReducer'
-import { projectsReducer } from './projectsHandler/projectsReducer'
+
 import { sagaWatcher } from './rootSaga'
+import { alertReducer } from './alertHandler/alertReducer'
+import { projectsReducer } from './projectsHandler/projectsReducer'
+import { optionReducer } from './optionHandler/optionReducer'
+import { notesReducer } from './notesHandler/notesReducer'
+import { authReducer } from './authHandler/authReducer'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const reducers = combineReducers({
     alert: alertReducer,
     projects: projectsReducer,
+    note: notesReducer,
+    option: optionReducer,
+    auth: authReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

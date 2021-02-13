@@ -1,19 +1,23 @@
 import { Formik } from "formik";
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
+import PropTypes from 'prop-types'
+import {createUser} from '../../redux/authHandler/authReducer'
 
-const SignUp = ({ createUser, error, user, ...props }) => {
+const Register = ({ createUser, token, ...props }) => { // error
     const handleSubmit = (formData) => {
-        createUserWithEmailAndPassword(formData.email, formData.password)
+        // console.log(formData)
+        createUser(formData)
     }
     return (
         <>
-            { user
+            { token
                 ? <Redirect to={'/'} />
                 : <div className='auth'>
                     <div className="outer">
                         <div className="inner">
-                            <SignUpFormikForm handleSubmit={handleSubmit} submitError={error} />
+                            <SignUpFormikForm handleSubmit={handleSubmit} /> {/*submitError={error} /> */}
                         </div>
                     </div>
                 </div>
@@ -22,6 +26,11 @@ const SignUp = ({ createUser, error, user, ...props }) => {
     );
 }
 
+Register.propTypes = {
+    // error: PropTypes.string,
+    token: PropTypes.string,
+    createUser: PropTypes.func,
+}
 
 
 const SignUpFormikForm = ({ handleSubmit, submitError, ...props }) => {
@@ -86,14 +95,16 @@ const SignUpFormikForm = ({ handleSubmit, submitError, ...props }) => {
 
                     {errors.password && touched.password && errors.password}
                     {submitError}
-                    <button type="submit" className="btn btn-dark btn-lg btn-block" disabled={isSubmitting} >Register</button>
+                    <button type="submit" className="btn btn-dark btn-lg btn-block" disabled={isSubmitting}>Register</button>
                     <p className="forgot-password text-right">
-                        <NavLink className="nav-link" to="/sign-in">Log in</NavLink>
+                        <NavLink className="nav-link" to="/login">Log in</NavLink>
                     </p>
                 </form>
             )}
         </Formik>
     )
 }
-
-export default SignUp
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+})
+export default connect(mapStateToProps, { createUser })(Register)

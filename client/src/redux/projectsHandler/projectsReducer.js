@@ -1,18 +1,15 @@
-import TYPES from './projectsTypes';
+import TYPES from '../types';
 
 
 const initialState = {
     notes: [],
     projects: [],
-    loading: false,
     currentProject: {},
     userID: null
 }
 
 export const projectsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TYPES.CHANGE_LOADER:
-            return { ...state, ...action.payload }
         case TYPES.ADD_NOTE:
             return {
                 ...state,
@@ -59,7 +56,6 @@ export const projectsReducer = (state = initialState, action) => {
                 ...state,
                 notes: [],
                 projects: [],
-                loading: false,
                 currentProject: {},
                 userID: null
             }
@@ -70,26 +66,16 @@ export const projectsReducer = (state = initialState, action) => {
     }
 }
 
-export const showLoader = () => ({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-export const fetchNotes = (projectID) => ({ type: TYPES.REQUEST_NOTES, projectID })
+
 export const fetchProjects = (userID) => ({ type: TYPES.REQUEST_PROJECTS, userID })
-export const removeNote = (projectID, noteID) => ({ type: TYPES.REQUEST_REMOVE_NOTE, projectID, noteID })
-export const addNote = (title, projectID) => ({ type: TYPES.REQUEST_ADD_NOTE, note: { title, date: new Date().toJSON(), completed: false }, projectID })
 export const addProject = (title, description, userID) => ({ type: TYPES.REQUEST_ADD_PROJECT, project: { title, date: new Date().toJSON(), description, followingUsers: [userID], owner: userID } })
-export const onChangeCompleteNote = (note, projectID) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note, projectID })
 export const removeProject = (projectID) => ({ type: TYPES.REQUEST_REMOVE_PROJECT, projectID })
 export const setCurrentProject = (projectID) => ({ type: TYPES.SET_CURRENT_PROJECT, projectID })
 export const addUserToProject = (project, userID) => ({ type: TYPES.ADD_USER_TO, project, userID })
 export const setNewSettings = (project, title) => ({ type: TYPES.REQUEST_UPDATE_SETTINGS, project, payload: { title } })
 
-export const setUserID = (userID) => ({
-    type: TYPES.SET_USER_ID,
-    payload: { userID }
-})
 export const clearData = () => ({ type: TYPES.CLEAR_DATA })
-export const signOut = () => ({ type: TYPES.REQUEST_SIGN_OUT })
-export const createUser = (email, password) => ({ type: TYPES.REQUEST_CREATE_USER })
-export const signIn = (email, password) => ({ type: TYPES.REQUEST_SIGN_USER })
+
 
 
 

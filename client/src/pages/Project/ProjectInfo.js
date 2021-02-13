@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import Form from '../../components/Form';
 import { Loader } from '../../components/Loader';
 import { connect } from 'react-redux';
-import { addNote, fetchNotes, removeNote, removeProject, onChangeCompleteNote } from '../../redux/projectsHandler/projectsReducer';
+import { removeProject } from '../../redux/projectsHandler/projectsReducer';
+import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../../redux/notesHandler/notesReducer';
 import { Notes } from '../../components/Notes';
 import { NavLink, Redirect } from 'react-router-dom';
+
 
 
 const ProjectInfo = ({

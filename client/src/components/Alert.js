@@ -1,21 +1,12 @@
-//@flow
 import *as React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { hide } from '../redux/AlertHandler/alertReducer';
 
-type MapStateToProps = {
-    visible: boolean,
-    text: string,
-    type: string,
-};
-type Props = {
-    ...MapStateToProps,
-    hide:() => void
-};
+import { hide } from '../redux/alertHandler/alertReducer';
 
 
-const Alert = ({ visible, type, text, hide }): React.Node => {
+
+const Alert = ({ visible, type, text, hide }) => {
     return (
         <CSSTransition
             in={visible}
@@ -37,9 +28,9 @@ const Alert = ({ visible, type, text, hide }): React.Node => {
         </CSSTransition>
     );
 }
-const mapStateToProps = (state: Object): Object => ({
+const mapStateToProps = (state) => ({
     visible: state.alert.visible,
     text: state.alert.text,
     type: state.alert.type,
-}: MapStateToProps)
-export default (connect<Props, _, _, _, _, _,>(mapStateToProps, { hide })(Alert): React.AbstractComponent<{}>)
+})
+export default connect(mapStateToProps, { hide })(Alert)

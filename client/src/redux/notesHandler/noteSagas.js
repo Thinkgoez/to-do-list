@@ -1,30 +1,28 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
-import { firebaseApi } from "../../api/api"
-import TYPES from './notesTypes'
+import { call, put } from "redux-saga/effects"
+import { Api } from "../../api/api"
+import TYPES from '../types'
 
-export function* noteWatcherSaga(){
-    while(true){
-        yield takeLatest(TYPES.REQUEST_NOTES, fetchNotesSaga)
-        yield takeEvery(TYPES.REQUEST_ADD_NOTE, addNoteSaga)
-        yield takeEvery(TYPES.REQUEST_REMOVE_NOTE, removeNoteSaga)
-        yield takeEvery(TYPES.REQUEST_COMPLETE_NOTE, changeCompleteSaga)
-    }
-}
+// export function* noteWatcherSaga(){
+//     while(true){
+
+//     }
+// }
 
 
-function* fetchNotesSaga(action) {
+export function* fetchNotesSaga(action) {
     yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-    const res = yield call(firebaseApi.getNotes, action.projectID)
+    const res = yield call(Api.getNotesByProjectID, action.projectID)
     let payload = []
-    if (res.data) {payload = Object.keys(res.data).map(key => ({ ...res.data[key], id: key }))
+    if (res.data) {
+        payload = Object.keys(res.data).map(key => ({ ...res.data[key], id: key }))
     }
     yield put({ type: TYPES.FETCH_NOTES, payload })
     yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
-
 }
-function* addNoteSaga(action) {
+
+export function* addNoteSaga(action) {
     try {
-        const res = yield call(firebaseApi.addNotes, action.note, action.projectID);
+        const res = yield call(Api.addNote, action.note, action.projectID);
         yield put({
             type: TYPES.ADD_NOTE,
             payload: {
@@ -37,9 +35,9 @@ function* addNoteSaga(action) {
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
     }
 }
-function* removeNoteSaga(action) {
+export function* removeNoteSaga(action) {
     try {
-        const res = yield call(firebaseApi.removeNote, action.projectID, action.noteID);
+        const res = yield call(Api.removeNote, action.projectID, action.noteID);
         if (res.status === 200) {
             yield put({
                 type: TYPES.REMOVE_NOTE,
@@ -51,9 +49,9 @@ function* removeNoteSaga(action) {
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
     }
 }
-function* changeCompleteSaga(action) {
+export function* changeCompleteSaga(action) {
     try {
-        const res = yield call(firebaseApi.changeComplete, action.note, action.projectID)
+        const res = yield call(Api.updateNote, action.note, action.projectID)
         if (res.status === 200) {
             yield put({
                 type: TYPES.COMPLETE_NOTE,

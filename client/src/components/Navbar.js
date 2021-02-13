@@ -16,20 +16,20 @@ export const Navbar = (props) => {
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/about">Информация</NavLink>
                 </li>
-                {!props.user
+                {!props.token
                     ? <>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/sign-up">Зарегистрироватся</NavLink>
+                            <NavLink className="nav-link" to="/register">Зарегистрироватся</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/sign-in">Логинизироваться</NavLink>
+                            <NavLink className="nav-link" to="/login">Логинизироваться</NavLink>
                         </li>
                     </>
                     : <>
-                        <li className="nav-item"><NavLink className="nav-link" to="/userInfo">{props.user.displayName || 'Profile'}</NavLink></li>
+                        {/* <li className="nav-item"><NavLink className="nav-link" to="/userInfo">{props.user.displayName || 'Profile'}</NavLink></li> */}
                         <li className="nav-item">
                             <button className="btn btn-link text-white" onClick={() => {
-                                props.signOut()
+                                props.logout()
                                 }}>Совершить попытку выхода</button>
                         </li>
                     </>

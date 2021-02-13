@@ -1,26 +1,36 @@
 import { Formik } from "formik";
 import React from "react";
 import { Redirect } from "react-router-dom";
+import PropTypes from 'prop-types'
+import { connect } from "react-redux";
 
-const Login = ({ signIn, user, ...props }) => {
+import { login } from '../../redux/authHandler/authReducer'
+
+const Login = ({ login, token, ...props }) => { // error
+    // console.log(token)
     const handleSubmit = (formData) => {
-        signIn(formData.email, formData.password)
+        login(formData.email, formData.password)
     }
     return (
         <>
-            {user
+            {token
                 ? <Redirect to={'/'} />
                 : <div className='auth'>
                     <div className="outer">
                         <div className="inner">
-                            <LoginFormikForm handleSubmit={handleSubmit} submitError={props.error} />
-
+                            <LoginFormikForm handleSubmit={handleSubmit} /> {/* submitError={error} /> */}
                         </div>
                     </div>
                 </div>
             }
         </>
     );
+}
+
+Login.propTypes = {
+    login: PropTypes.func,
+    token: PropTypes.string,
+    // error: PropTypes.object
 }
 
 const LoginFormikForm = ({ handleSubmit, submitError, ...props }) => {
@@ -93,4 +103,8 @@ const LoginFormikForm = ({ handleSubmit, submitError, ...props }) => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+})
+
+export default connect(mapStateToProps, { login })(Login)

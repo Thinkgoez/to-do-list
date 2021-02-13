@@ -3,7 +3,6 @@ import { Formik } from 'formik'
 import { Redirect } from 'react-router-dom'
 
 
-
 const SettingsForm = ({ userName, ...props }) => {
     return (
         <Formik

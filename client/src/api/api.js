@@ -1,33 +1,50 @@
 import axios from 'axios'
-// import { firebaseDatabase } from '../App'
-const URL = "https://react-note-be61d.firebaseio.com"
+const URL = "http://localhost:5000"
 
-export const firebaseApi = {
-    removeNote(propjectID, noteID) {
-        return axios.delete(`${URL}/notes/${propjectID}/${noteID}.json`)
+export const Api = {
+    getNotesByProjectID(projectID) {
+        return axios.get(`${URL}/tasks/${projectID}`)
     },
-    getNotes(projectID) {
-        return axios.get(`${URL}/notes/${projectID}.json`)
+    addNote(task, projectID) {
+        return axios.post(`${URL}/tasks/${projectID}`, task)
     },
-    addNotes(note, projectID) {
-        return axios.post(`${URL}/notes/${projectID}.json`, note)
+    removeNote(propjectID, taskID) {
+        return axios.delete(`${URL}/tasks/${propjectID}/${taskID}`)
     },
-    changeComplete(note, projectID) {
-        return axios.patch(`${URL}/notes/${projectID}/${note.id}.json`, { ...note, completed: !note.completed })
+    // updateNote(task, projectID) {
+    //     return axios.patch(`${URL}/tasks/${projectID}/${task.id}`, { ...task, completed: !task.completed })
+    // },
+    updateNote(task, projectID) {
+        return axios.patch(`${URL}/tasks/${projectID}/${task.id}`, task)
     },
-    getProjects() {
-        return axios.get(`${URL}/projects.json`)
+
+    // ****** project API
+    getAllProjects() {
+        return axios.get(`${URL}/projects`)
+    },
+    getProject(id) {
+        return axios.get(`${URL}/projects/${id}`)
     },
     addProject(project) {
-        return axios.post(`${URL}/projects.json`, project)
+        return axios.post(`${URL}/projects`, project)
     },
     removeProject(projectID) {
-        return axios.delete(`${URL}/projects/${projectID}.json`)
+        return axios.delete(`${URL}/projects/${projectID}`)
     },
-    addUserToProject(project, userID) {
-        return axios.patch(`${URL}/projects/${project.id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
+    // addUserToProject(project, userID) {
+    //     return axios.patch(`${URL}/projects/${project.id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
+    // },
+    updateProject(project) {
+        return axios.patch(`${URL}/projects/${project.id}`, project)
     },
-    changeSettings(project, payload) {
-        return axios.patch(`${URL}/projects/${project.id}/.json`, { ...project, ...payload })
+    // updateSettings(project, payload) {
+    //     return axios.patch(`${URL}/projects/${project.id}`, { ...project, ...payload })
+    // },
+
+    login(userData){
+        return axios.post(`${URL}/auth/login`, userData)
     },
+    register(userData){
+        return axios.post(`${URL}/auth/register`, userData)
+    }
 }

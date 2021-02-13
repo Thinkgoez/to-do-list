@@ -1,21 +1,24 @@
 import * as React from 'react'
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import Form from '../components/Form';
 import Projects from '../components/Projects';
 import { Loader } from '../components/Loader';
-import { connect } from 'react-redux';
 import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/projectsHandler/projectsReducer';
 
-const Home = ({ projects, addProject, setCurrentProject, loading, removeProject, userID, ...props }) => {
-    useEffect(() => {
-        if (!!userID) {
-            props.fetchProjects(userID)
-        }
-    }, [userID, props.fetchProjects])
 
+const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading, removeProject, token, ...props }) => {
+    useEffect(() => {
+        if (!!token) {
+            fetchProjects()
+        }
+    }, [token, fetchProjects])
+    if (!token) return <Redirect to='/login' />
     return (
         <>
-            <Form handleSubmit={(fromData) => addProject(fromData.formValue, 'second', userID)} />
+            <Form handleSubmit={(fromData) => addProject(fromData.formValue, 'second')} />
             <hr />
             {loading
                 ? <Loader />
@@ -25,10 +28,10 @@ const Home = ({ projects, addProject, setCurrentProject, loading, removeProject,
     )
 }
 
-const mapS = state => ({
-    loading: state.firebase.loading,
-    userID: state.firebase.userID,
-    projects: state.firebase.projects,
+const mapStateToProps = state => ({
+    loading: state.option.loading,
+    projects: state.projects.projects,
+    token: state.auth.token
 })
 
-export default connect(mapS, { removeProject, fetchProjects, setCurrentProject, addProject })(Home)
+export default connect(mapStateToProps, { removeProject, fetchProjects, setCurrentProject, addProject })(Home)

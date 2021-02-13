@@ -1,9 +1,9 @@
-import TYPES from "./alertTypes";
+import TYPES from "../types";
 
 const initialState = {
     visible: false,
-    type: TYPES.SHOW_ALERT,
-    text: '' 
+    type: '',
+    text: '' ,
 }
 
 export const alertReducer = (state = initialState, action) => {
