@@ -1,50 +1,57 @@
 import axios from 'axios'
-const URL = "http://localhost:5000"
+const URL = 'http://localhost:5000'
+
+const instance = axios.create({
+    baseURL: URL,
+    headers: {
+        'Authorization': localStorage.getItem('auth-token') || ''
+    }
+})
 
 export const Api = {
     getNotesByProjectID(projectID) {
-        return axios.get(`${URL}/tasks/${projectID}`)
+        return instance.get(`/tasks/${projectID}`)
     },
     addNote(task, projectID) {
-        return axios.post(`${URL}/tasks/${projectID}`, task)
+        return instance.post(`/tasks/${projectID}`, task)
     },
-    removeNote(propjectID, taskID) {
-        return axios.delete(`${URL}/tasks/${propjectID}/${taskID}`)
+    removeNote(taskID) {
+        return instance.delete(`/tasks/${taskID}`)
     },
     // updateNote(task, projectID) {
     //     return axios.patch(`${URL}/tasks/${projectID}/${task.id}`, { ...task, completed: !task.completed })
     // },
     updateNote(task, projectID) {
-        return axios.patch(`${URL}/tasks/${projectID}/${task.id}`, task)
+        return instance.patch(`/tasks/${projectID}/${task.id}`, task)
     },
 
     // ****** project API
     getAllProjects() {
-        return axios.get(`${URL}/projects`)
+        return instance.get(`/projects`)
     },
     getProject(id) {
-        return axios.get(`${URL}/projects/${id}`)
+        return instance.get(`/projects/${id}`)
     },
     addProject(project) {
-        return axios.post(`${URL}/projects`, project)
+        return instance.post(`/projects`, project)
     },
     removeProject(projectID) {
-        return axios.delete(`${URL}/projects/${projectID}`)
+        return instance.delete(`/projects/${projectID}`)
     },
     // addUserToProject(project, userID) {
     //     return axios.patch(`${URL}/projects/${project.id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
     // },
     updateProject(project) {
-        return axios.patch(`${URL}/projects/${project.id}`, project)
+        return instance.patch(`/projects/${project.id}`, project)
     },
     // updateSettings(project, payload) {
     //     return axios.patch(`${URL}/projects/${project.id}`, { ...project, ...payload })
     // },
 
     login(userData){
-        return axios.post(`${URL}/auth/login`, userData)
+        return instance.post(`/auth/login`, userData)
     },
     register(userData){
-        return axios.post(`${URL}/auth/register`, userData)
+        return instance.post(`/auth/register`, userData)
     }
 }

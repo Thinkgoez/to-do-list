@@ -2,7 +2,7 @@ import TYPES from '../types';
 
 
 const initialState = {
-    notes: [],
+    // notes: [],
     projects: [],
     currentProject: {},
     userID: null
@@ -10,45 +10,45 @@ const initialState = {
 
 export const projectsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TYPES.ADD_NOTE:
-            return {
-                ...state,
-                notes: [...state.notes, action.payload]
-            }
+        // case TYPES.ADD_NOTE:
+        //     return {
+        //         ...state,
+        //         notes: [...state.notes, action.payload]
+        //     }
         case TYPES.ADD_PROJECT:
             return {
                 ...state,
                 projects: [...state.projects, { ...action.payload }]
             }
-        case TYPES.FETCH_NOTES:
-            return { ...state, notes: action.payload }
+        // case TYPES.FETCH_NOTES:
+        //     return { ...state, notes: action.payload }
         case TYPES.FETCH_PROJECT:
             return { ...state, projects: action.payload }
-        case TYPES.REMOVE_NOTE:
-            return {
-                ...state,
-                notes: state.notes.filter(note => note.id !== action.payload)
-            }
+        // case TYPES.REMOVE_NOTE:
+        //     return {
+        //         ...state,
+        //         notes: state.notes.filter(note => note._id !== action.payload)
+        //     }
         case TYPES.REMOVE_PROJECT:
             return {
                 ...state,
-                projects: state.projects.filter(project => project.id !== action.payload),
+                projects: state.projects.filter(project => project._id !== action.payload),
                 currentProject: {}
             }
-        case TYPES.COMPLETE_NOTE:
-            return {
-                ...state,
-                notes: state.notes.map(note => { if (note.id === action.payload) note.completed = !note.completed; return note })
-            }
+        // case TYPES.COMPLETE_NOTE:
+        //     return {
+        //         ...state,
+        //         notes: state.notes.map(note => { if (note._id === action.payload) note.completed = !note.completed; return note })
+        //     }
         case TYPES.SET_CURRENT_PROJECT:
             return {
                 ...state,
-                currentProject: state.projects.find(proj => proj.id === action.projectID),
+                currentProject: state.projects.find(proj => proj._id === action.projectID),
             }
         case TYPES.CHANGE_SETTINGS:
             return {
                 ...state,
-                projects: state.projects.map(project => { if (project.id === action.project.id) return action.project; return project }),
+                projects: state.projects.map(project => { if (project._id === action.project._id) return action.project; return project }),
                 currentProject: action.project
             }
         case TYPES.CLEAR_DATA:

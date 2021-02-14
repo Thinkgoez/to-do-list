@@ -4,10 +4,10 @@ import TYPES from '../types'
 
 export function* fetchProjectsSaga(action) {
     yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-    const res = yield call(Api.getProjects, action.userID)
+    const res = yield call(Api.getAllProjects, action.userID)
     let payload = []
     if (res.data) {
-        payload = Object.keys(res.data).filter(key => res.data[key].followingUsers.includes(action.userID)).map(key => ({ ...res.data[key], id: key }))
+        payload = res.data
     }
 
     yield put({ type: TYPES.FETCH_PROJECT, payload })
@@ -21,7 +21,7 @@ export function* addProjectSaga(action) {
             type: TYPES.ADD_PROJECT,
             payload: {
                 ...action.project,
-                id: res.data.name
+                ...res.data
             }
         })
         yield put({

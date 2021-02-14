@@ -30,7 +30,7 @@ const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading,
 
 const mapStateToProps = state => ({
     loading: state.option.loading,
-    projects: state.projects.projects,
+    projects: state.project.projects,
     token: state.auth.token
 })
 

@@ -8,7 +8,7 @@ const Projects = ({setCurrentProject, ...props}) => {
             { props.projects.length !== 0 ?
                 <ul className="list-group">
                     {props.projects.map(project => (
-                        <Project key={project.id} project={project} onRemove={props.removeProject} setProject={setCurrentProject} />
+                        <Project key={project._id} project={project} onRemove={props.removeProject} setProject={setCurrentProject} />
                     ))}
 
                 </ul>
@@ -19,13 +19,13 @@ const Projects = ({setCurrentProject, ...props}) => {
 }
 const Project = ({ project, setProject, ...props }) => {
     return (
-        <div key={project.id} className={'project'} timeout={800}>
-            <NavLink to={`/projects/${project.title}`} onClick={()=> setProject(project.id)}>
+        <div className={'project'} timeout={800}>
+            <NavLink to={`/projects/${project.title}`} onClick={()=> setProject(project._id)}>
                 <li className={`d-flex list-group-item note`}>
                     <div className='d-flex align-items-center'>
                         <strong>{project.title}</strong>
-                        <small>{new Date(project.date).toLocaleString()}</small>
-                        <small>{project.description}</small>x
+                        {/* <small>{new Date(project.date).toLocaleString()}</small> */}
+                        <small>{project.description}</small>
                 </div>
                     <div>
                         {/* <button

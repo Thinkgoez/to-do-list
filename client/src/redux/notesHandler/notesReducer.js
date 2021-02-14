@@ -9,10 +9,10 @@ export const notesReducer = (state = initialState, action) => {
         case TYPES.ADD_NOTE:
             return {
                 ...state,
-                notes: [...state.notes, action.payload.note]
+                notes: [...state.notes, action.payload]
             }
         case TYPES.FETCH_NOTES:
-            return { ...state, notes: action.payload.notes }
+            return { ...state, notes: action.payload }
 
         case TYPES.REMOVE_NOTE:
             return {
@@ -30,6 +30,6 @@ export const notesReducer = (state = initialState, action) => {
 }
 
 export const fetchNotes = (projectID) => ({ type: TYPES.REQUEST_NOTES, projectID })
-export const removeNote = (projectID, noteID) => ({ type: TYPES.REQUEST_REMOVE_NOTE, projectID, noteID })
+export const removeNote = (noteID) => ({ type: TYPES.REQUEST_REMOVE_NOTE, noteID })
 export const addNote = (title, projectID) => ({ type: TYPES.REQUEST_ADD_NOTE, note: { title, date: new Date().toJSON(), completed: false }, projectID })
-export const onChangeCompleteNote = (note, projectID) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note, projectID })
+export const onChangeCompleteNote = (projectID, note) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note, projectID })

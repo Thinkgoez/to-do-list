@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const reducers = combineReducers({
     alert: alertReducer,
-    projects: projectsReducer,
+    project: projectsReducer,
     note: notesReducer,
     option: optionReducer,
     auth: authReducer,

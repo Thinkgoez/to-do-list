@@ -14,7 +14,8 @@ export function* fetchNotesSaga(action) {
     const res = yield call(Api.getNotesByProjectID, action.projectID)
     let payload = []
     if (res.data) {
-        payload = Object.keys(res.data).map(key => ({ ...res.data[key], id: key }))
+        payload = res.data
+        // console.log(res.data)
     }
     yield put({ type: TYPES.FETCH_NOTES, payload })
     yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
@@ -27,7 +28,7 @@ export function* addNoteSaga(action) {
             type: TYPES.ADD_NOTE,
             payload: {
                 ...action.note,
-                id: res.data.name
+                ...res.data
             }
         })
     } catch (e) {
@@ -37,7 +38,7 @@ export function* addNoteSaga(action) {
 }
 export function* removeNoteSaga(action) {
     try {
-        const res = yield call(Api.removeNote, action.projectID, action.noteID);
+        const res = yield call(Api.removeNote, action.noteID);
         if (res.status === 200) {
             yield put({
                 type: TYPES.REMOVE_NOTE,
