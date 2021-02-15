@@ -3,7 +3,7 @@ import TYPES from './types'
 
 import {
     fetchProjectsSaga, addProjectSaga, removeProjectSaga,
-    addUserToProjectSaga, changeProjectSaga
+    addUserToProjectSaga, updateProjectSaga
 } from './projectsHandler/projectsSagas'
 import { fetchNotesSaga, addNoteSaga, removeNoteSaga, changeCompleteSaga } from './notesHandler/noteSagas'
 import { loginSaga, logoutSaga, registerSaga } from './authHandler/authSagas'
@@ -19,7 +19,7 @@ export function* sagaWatcher() {
         yield takeEvery(TYPES.REQUEST_ADD_PROJECT, addProjectSaga)
         yield takeEvery(TYPES.REQUEST_REMOVE_PROJECT, removeProjectSaga)
         yield takeEvery(TYPES.ADD_USER_TO, addUserToProjectSaga)
-        yield takeEvery(TYPES.REQUEST_UPDATE_SETTINGS, changeProjectSaga)
+        yield takeEvery(TYPES.REQUEST_UPDATE_PROJECT, updateProjectSaga)
 
         yield takeLatest(TYPES.REQUEST_NOTES, fetchNotesSaga)
         yield takeEvery(TYPES.REQUEST_ADD_NOTE, addNoteSaga)

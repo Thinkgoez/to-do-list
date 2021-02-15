@@ -2,28 +2,31 @@ import { call, put } from "redux-saga/effects"
 import { Api } from "../../api/api"
 import TYPES from '../types'
 
-// export function* noteWatcherSaga(){
-//     while(true){
-
-//     }
-// }
 
 
 export function* fetchNotesSaga(action) {
-    yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-    const res = yield call(Api.getNotesByProjectID, action.projectID)
-    let payload = []
-    if (res.data) {
-        payload = res.data
-        // console.log(res.data)
+    try {
+        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
+        const res = yield call(Api.getNotesByProjectID, action.projectID)
+        let payload = []
+        if (res.data) {
+            payload = res.data
+        } else if (res.status) {
+            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка авторизации', type: 'danger' } })
+        }
+        yield put({ type: TYPES.FETCH_NOTES, payload })
+        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
+    } catch (error) {
+        console.log(error)
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось загрузить задачи', type: 'danger' } })
     }
-    yield put({ type: TYPES.FETCH_NOTES, payload })
-    yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
+
 }
 
 export function* addNoteSaga(action) {
     try {
         const res = yield call(Api.addNote, action.note, action.projectID);
+        console.log(res)
         yield put({
             type: TYPES.ADD_NOTE,
             payload: {
@@ -33,7 +36,7 @@ export function* addNoteSaga(action) {
         })
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось добавить новое задачу', type: 'danger' } })
     }
 }
 export function* removeNoteSaga(action) {
@@ -47,20 +50,20 @@ export function* removeNoteSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось удалить задачу', type: 'danger' } })
     }
 }
 export function* changeCompleteSaga(action) {
     try {
-        const res = yield call(Api.updateNote, action.note, action.projectID)
+        const res = yield call(Api.updateNote, action.note)
         if (res.status === 200) {
             yield put({
                 type: TYPES.COMPLETE_NOTE,
-                payload: action.note.id
+                note: action.note
             })
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось изменить задачу', type: 'danger' } })
     }
 }

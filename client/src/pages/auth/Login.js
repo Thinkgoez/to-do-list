@@ -33,7 +33,7 @@ Login.propTypes = {
     // error: PropTypes.object
 }
 
-const LoginFormikForm = ({ handleSubmit, submitError, ...props }) => {
+const LoginFormikForm = ({ handleSubmit, ...props }) => { //submitError,
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
@@ -94,7 +94,7 @@ const LoginFormikForm = ({ handleSubmit, submitError, ...props }) => {
                             <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                         </div>
                     </div>
-                    {submitError}
+                    {/* {submitError} */}
                     {errors.password && touched.password && errors.password}
                     <button type="submit" className="btn btn-dark btn-lg btn-block" disabled={isSubmitting} >Sign in</button>
                 </form>
@@ -103,6 +103,9 @@ const LoginFormikForm = ({ handleSubmit, submitError, ...props }) => {
     )
 }
 
+LoginFormikForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired
+}
 const mapStateToProps = (state) => ({
     token: state.auth.token
 })

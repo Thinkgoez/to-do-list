@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import PropTypes from 'prop-types'
-import {createUser} from '../../redux/authHandler/authReducer'
+import { createUser } from '../../redux/authHandler/authReducer'
 
 const Register = ({ createUser, token, ...props }) => { // error
     const handleSubmit = (formData) => {
@@ -26,14 +26,8 @@ const Register = ({ createUser, token, ...props }) => { // error
     );
 }
 
-Register.propTypes = {
-    // error: PropTypes.string,
-    token: PropTypes.string,
-    createUser: PropTypes.func,
-}
 
-
-const SignUpFormikForm = ({ handleSubmit, submitError, ...props }) => {
+const SignUpFormikForm = ({ handleSubmit, ...props }) => { //submitError
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
@@ -94,7 +88,7 @@ const SignUpFormikForm = ({ handleSubmit, submitError, ...props }) => {
                     </div>
 
                     {errors.password && touched.password && errors.password}
-                    {submitError}
+                    {/* {submitError} */}
                     <button type="submit" className="btn btn-dark btn-lg btn-block" disabled={isSubmitting}>Register</button>
                     <p className="forgot-password text-right">
                         <NavLink className="nav-link" to="/login">Log in</NavLink>
@@ -104,6 +98,18 @@ const SignUpFormikForm = ({ handleSubmit, submitError, ...props }) => {
         </Formik>
     )
 }
+
+Register.propTypes = {
+    // error: PropTypes.string,
+    token: PropTypes.string,
+    createUser: PropTypes.func,
+}
+
+SignUpFormikForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired
+}
+
+
 const mapStateToProps = (state) => ({
     token: state.auth.token
 })

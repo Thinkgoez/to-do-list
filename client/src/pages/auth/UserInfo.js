@@ -87,6 +87,8 @@ const UserInfo = ({ user, ...props }) => {
     )
 }
 
+// UserInfo.propTypes = {
 
+// }
 
 export default UserInfo

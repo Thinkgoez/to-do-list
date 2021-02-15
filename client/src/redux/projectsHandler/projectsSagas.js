@@ -1,17 +1,25 @@
 import { call, put } from 'redux-saga/effects'
+import jwt_decode from "jwt-decode";
 import { Api } from '../../api/api'
 import TYPES from '../types'
 
-export function* fetchProjectsSaga(action) {
-    yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-    const res = yield call(Api.getAllProjects, action.userID)
-    let payload = []
-    if (res.data) {
-        payload = res.data
-    }
 
-    yield put({ type: TYPES.FETCH_PROJECT, payload })
-    yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
+
+export function* fetchProjectsSaga(action) {
+    try{
+        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
+        const res = yield call(Api.getAllProjects, action.userID)
+        let payload = []
+        if (res.data) {
+            payload = res.data.map(project => setOwnerHelper(project))
+        }
+        yield put({ type: TYPES.FETCH_PROJECT, payload })
+        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
+    } catch (error) {
+        console.log(error)
+        yield put({type: TYPES.REQUEST_ERROR, payload: { text: 'Возникла ошибка при загрузки проектов', type: 'danger' }})
+    }
+    
 }
 
 export function* addProjectSaga(action) {
@@ -21,7 +29,7 @@ export function* addProjectSaga(action) {
             type: TYPES.ADD_PROJECT,
             payload: {
                 ...action.project,
-                ...res.data
+                ...setOwnerHelper(res.data)
             }
         })
         yield put({
@@ -30,7 +38,7 @@ export function* addProjectSaga(action) {
         })
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении нового проекта', type: 'danger' } })
     }
 }
 export function* removeProjectSaga(action) {
@@ -41,27 +49,27 @@ export function* removeProjectSaga(action) {
                 type: TYPES.REMOVE_PROJECT,
                 payload: action.projectID
             })
-            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно удален', type: 'success' } })
+            // yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно удален', type: 'success' } })
 
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при удалении проекта', type: 'danger' } })
     }
 }
 
-export function* changeProjectSaga(action) {
+export function* updateProjectSaga(action) {
     try {
-        const res = yield call(Api.changeSettings, action.project, action.payload);
+        const res = yield call(Api.updateProject, action.project);
         if (res.status === 200) {
             yield put({
                 type: TYPES.CHANGE_SETTINGS,
-                project: { ...action.project, ...action.payload }
+                project: { ...action.project }
             })
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при изменении проекта', type: 'danger' } })
     }
 }
 export function* addUserToProjectSaga(action) {
@@ -75,6 +83,15 @@ export function* addUserToProjectSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Что-то пошло не так', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении пользователя', type: 'danger' } })
     }
+}
+
+function setOwnerHelper(project) {
+    const strogeToken = localStorage.getItem('auth-token')
+    let isOwner = false
+    if (strogeToken) {
+        isOwner = project.owner === jwt_decode(strogeToken).userID
+    }
+    return { ...project, isOwner }
 }

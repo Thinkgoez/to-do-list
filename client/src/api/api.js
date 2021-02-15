@@ -19,10 +19,10 @@ export const Api = {
         return instance.delete(`/tasks/${taskID}`)
     },
     // updateNote(task, projectID) {
-    //     return axios.patch(`${URL}/tasks/${projectID}/${task.id}`, { ...task, completed: !task.completed })
+    //     return axios.patch(`${URL}/tasks/${projectID}/${task._id}`, { ...task, completed: !task.completed })
     // },
-    updateNote(task, projectID) {
-        return instance.patch(`/tasks/${projectID}/${task.id}`, task)
+    updateNote(task) {
+        return instance.patch(`/tasks/${task._id}`, task)
     },
 
     // ****** project API
@@ -39,13 +39,13 @@ export const Api = {
         return instance.delete(`/projects/${projectID}`)
     },
     // addUserToProject(project, userID) {
-    //     return axios.patch(`${URL}/projects/${project.id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
+    //     return axios.patch(`${URL}/projects/${project._id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
     // },
     updateProject(project) {
-        return instance.patch(`/projects/${project.id}`, project)
+        return instance.patch(`/projects/${project._id}`, project)
     },
     // updateSettings(project, payload) {
-    //     return axios.patch(`${URL}/projects/${project.id}`, { ...project, ...payload })
+    //     return axios.patch(`${URL}/projects/${project._id}`, { ...project, ...payload })
     // },
 
     login(userData){

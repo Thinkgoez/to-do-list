@@ -1,12 +1,15 @@
 import * as React from 'react'
 import { useEffect } from 'react';
-import Form from '../../components/Form';
-import { Loader } from '../../components/Loader';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
+
+import Form from '../../components/Form';
+import { Notes } from '../../components/Notes';
+import { Loader } from '../../components/Loader';
+
 import { removeProject } from '../../redux/projectsHandler/projectsReducer';
 import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../../redux/notesHandler/notesReducer';
-import { Notes } from '../../components/Notes';
-import { NavLink, Redirect } from 'react-router-dom';
 
 
 
@@ -19,7 +22,7 @@ const ProjectInfo = ({
         if (currentProject._id)
             fetchNotes(currentProject._id)
     }, [currentProject._id, fetchNotes])
-    
+
     if (Object.keys(currentProject).length === 0) {
         return (<Redirect to='/' />)
     }
@@ -27,7 +30,7 @@ const ProjectInfo = ({
     return (
         <>
             <h3>{currentProject.title}</h3>
-            {/* {(userID === currentProject.owner)? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary'>Settings</NavLink> : null} */}
+            {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary'>Settings</NavLink> : null}
             <Form handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
             <hr />
             {props.loading
@@ -35,11 +38,22 @@ const ProjectInfo = ({
                 : <Notes
                     notes={notes}
                     onRemove={removeNote}
-                    onCompleteNote={(note) => onChangeCompleteNote(currentProject._id, note )}
+                    onCompleteNote={onChangeCompleteNote}
                 />
             }
         </>
     )
+}
+
+ProjectInfo.propTypes = {
+    removeProject: PropTypes.func,
+    addNote: PropTypes.func,
+    fetchNotes: PropTypes.func,
+    removeNote: PropTypes.func,
+    onChangeCompleteNote: PropTypes.func,
+    loading: PropTypes.bool,
+    currentProject: PropTypes.object,
+    notes: PropTypes.array
 }
 
 const mapS = state => ({

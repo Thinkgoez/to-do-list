@@ -22,7 +22,7 @@ export const notesReducer = (state = initialState, action) => {
         case TYPES.COMPLETE_NOTE:
             return {
                 ...state,
-                notes: state.notes.map(note => { if (note._id === action.payload) note.completed = !note.completed; return note })
+                notes: state.notes.map(note => { if (note._id === action.note._id) note.completed = !note.completed; return note })
             }
         default:
             return state;
@@ -32,4 +32,4 @@ export const notesReducer = (state = initialState, action) => {
 export const fetchNotes = (projectID) => ({ type: TYPES.REQUEST_NOTES, projectID })
 export const removeNote = (noteID) => ({ type: TYPES.REQUEST_REMOVE_NOTE, noteID })
 export const addNote = (title, projectID) => ({ type: TYPES.REQUEST_ADD_NOTE, note: { title, date: new Date().toJSON(), completed: false }, projectID })
-export const onChangeCompleteNote = (projectID, note) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note, projectID })
+export const onChangeCompleteNote = (note) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note })

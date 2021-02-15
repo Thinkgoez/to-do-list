@@ -1,6 +1,6 @@
-//@flow
 import *as React from 'react';
 import { Formik } from "formik"
+import PropTypes from 'prop-types'
 
 
 const Form = ({ handleSubmit, ...props }) => {
@@ -9,11 +9,13 @@ const Form = ({ handleSubmit, ...props }) => {
             initialValues={{ formValue: '' }}
             validate={values => {
                 const errors = {};
-                if (!values.formValue) {
-                    errors.formValue = 'Required';
+                if (!values.formValue.trim()) {
+                    errors.formValue = "Shouldn't be empty";
                 }
                 return errors;
             }}
+            validateOnBlur={false}
+            // validateOnChange={false}
             onSubmit={(values, { resetForm }) => {
                 handleSubmit(values)
                 resetForm({ values: { formValue: '' } })
@@ -22,33 +24,40 @@ const Form = ({ handleSubmit, ...props }) => {
             {({
                 values,
                 errors,
-                touched,
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
+                setErrors,
                 ...props
             }) => (
-                    <>
-                        {errors.formValue && touched.formValue && errors.formValue}
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="formValue"
-                                    className="form-control"
-                                    placeholder="Введите название разметки"
-                                    value={values.formValue}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                        </form>
-                    </>
-                )
+                <>
+                    {errors.formValue}
+                    {/* {console.log(props)} */}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                name="formValue"
+                                className="form-control"
+                                placeholder="Введите название разметки"
+                                value={values.formValue}
+                                onChange={handleChange}
+                                onBlur={(e) => {
+                                    setErrors(errors.formValue = "")
+                                    handleBlur(e)
+                                }}
+                            />
+                        </div>
+                    </form>
+                </>
+            )
             }
         </Formik>
     )
+}
+
+Form.propTypes = {
+    handleSubmit: PropTypes.func
 }
 
 export default Form
