@@ -48,10 +48,16 @@ export const Api = {
     //     return axios.patch(`${URL}/projects/${project._id}`, { ...project, ...payload })
     // },
 
-    login(userData){
+    // ****** project API
+    getProfile(token) {
+        return axios.get('http://localhost:5000/auth/profile', {
+            headers: { 'Authorization': token }
+        })
+    },
+    login(userData) {
         return instance.post(`/auth/login`, userData)
     },
-    register(userData){
+    register(userData) {
         return instance.post(`/auth/register`, userData)
     }
 }

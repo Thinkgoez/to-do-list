@@ -6,7 +6,7 @@ import {
     addUserToProjectSaga, updateProjectSaga
 } from './projectsHandler/projectsSagas'
 import { fetchNotesSaga, addNoteSaga, removeNoteSaga, changeCompleteSaga } from './notesHandler/noteSagas'
-import { loginSaga, logoutSaga, registerSaga } from './authHandler/authSagas'
+import { loginSaga, logoutSaga, registerSaga, getProfileSaga } from './authHandler/authSagas'
 
 
 export function* sagaWatcher() {
@@ -14,6 +14,7 @@ export function* sagaWatcher() {
         yield takeEvery(TYPES.REQUEST_LOGIN_USER, loginSaga)
         yield takeEvery(TYPES.REQUEST_CREATE_USER, registerSaga)
         yield takeEvery(TYPES.REQUEST_LOGOUT, logoutSaga)
+        yield takeEvery(TYPES.REQUEST_PROFILE, getProfileSaga)
 
         yield takeEvery(TYPES.REQUEST_PROJECTS, fetchProjectsSaga)
         yield takeEvery(TYPES.REQUEST_ADD_PROJECT, addProjectSaga)

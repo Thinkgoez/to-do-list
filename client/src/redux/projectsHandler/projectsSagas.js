@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 import { Api } from '../../api/api'
 import TYPES from '../types'
 

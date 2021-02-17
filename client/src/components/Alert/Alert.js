@@ -2,7 +2,7 @@ import *as React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
-import { hide } from '../redux/alertHandler/alertReducer';
+import { hide } from '../../redux/alertHandler/alertReducer';
 
 
 
@@ -21,8 +21,8 @@ const Alert = ({ visible, type, text, hide }) => {
             <div className={`alert alert-${type || 'warning'} alert-dismissible`}>
                 <strong>Внимание!</strong>
                 {text}
-                <button onClick={hide} type="button" className="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button onClick={hide} type='button' className='close' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
                 </button>
             </div>
         </CSSTransition>

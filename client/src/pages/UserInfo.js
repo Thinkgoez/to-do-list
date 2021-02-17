@@ -30,21 +30,21 @@ const SettingsForm = ({ userName, ...props }) => {
         }) =>
         (
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className='form-group'>
                     <label>Rename:</label>
                     <input
-                        type="text"
-                        name="name"
+                        type='text'
+                        name='name'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.name}
-                        className="form-control"
-                        placeholder="New name"
+                        className='form-control'
+                        placeholder='New name'
                     />
                 </div>
 
                 {errors.name && touched.name && errors.name}
-                <button type="submit" disabled={isSubmitting} className='btn btn-secondary'>Save</button>
+                <button type='submit' disabled={isSubmitting} className='btn btn-secondary'>Save</button>
             </form>
         )
             }
@@ -76,7 +76,7 @@ const UserInfo = ({ user, ...props }) => {
                     <h3>{userName}</h3>
                     <hr />
                     <SettingsForm handleClick={handleClick} userName={userName} />
-                    <div className="form-group">
+                    <div className='form-group'>
                         <label>Your ID:</label>
                         <p>{user.uid}</p>
                     </div>

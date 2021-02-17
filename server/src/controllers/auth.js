@@ -58,3 +58,9 @@ module.exports.register = async function (req, res) {
         }
     }
 }
+
+module.exports.profile = async function (req, res) {
+    res.status(200).json({
+        message: 'Success'
+    })
+}

@@ -1,5 +1,5 @@
 import *as React from 'react';
-import { Formik } from "formik"
+import { Formik } from 'formik'
 import PropTypes from 'prop-types'
 
 
@@ -34,16 +34,16 @@ const Form = ({ handleSubmit, ...props }) => {
                     {errors.formValue}
                     {/* {console.log(props)} */}
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <input
-                                type="text"
-                                name="formValue"
-                                className="form-control"
-                                placeholder="Введите название разметки"
+                                type='text'
+                                name='formValue'
+                                className='form-control'
+                                placeholder='Введите название разметки'
                                 value={values.formValue}
                                 onChange={handleChange}
                                 onBlur={(e) => {
-                                    setErrors(errors.formValue = "")
+                                    setErrors(errors.formValue = '')
                                     handleBlur(e)
                                 }}
                             />
@@ -57,7 +57,7 @@ const Form = ({ handleSubmit, ...props }) => {
 }
 
 Form.propTypes = {
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func.isRequired
 }
 
 export default Form

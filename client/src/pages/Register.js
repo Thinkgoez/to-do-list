@@ -1,9 +1,9 @@
-import { Formik } from "formik";
-import React from "react";
-import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { Formik } from 'formik';
+import React from 'react';
+import { connect } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import { createUser } from '../../redux/authHandler/authReducer'
+import { createUser } from '../redux/authHandler/authReducer'
 
 const Register = ({ createUser, token, ...props }) => { // error
     const handleSubmit = (formData) => {
@@ -15,8 +15,8 @@ const Register = ({ createUser, token, ...props }) => { // error
             { token
                 ? <Redirect to={'/'} />
                 : <div className='auth'>
-                    <div className="outer">
-                        <div className="inner">
+                    <div className='outer'>
+                        <div className='inner'>
                             <SignUpFormikForm handleSubmit={handleSubmit} /> {/*submitError={error} /> */}
                         </div>
                     </div>
@@ -60,38 +60,38 @@ const SignUpFormikForm = ({ handleSubmit, ...props }) => { //submitError
             }) => (
                 <form onSubmit={handleSubmit}>
                     <h3>Register</h3>
-                    <div className="form-group">
+                    <div className='form-group'>
                         <label>Email</label>
                         <input
-                            type="email"
-                            name="email"
+                            type='email'
+                            name='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
-                            className="form-control"
-                            placeholder="Enter email"
+                            className='form-control'
+                            placeholder='Enter email'
                         />
                     </div>
 
                     {errors.email && touched.email && errors.email}
-                    <div className="form-group">
+                    <div className='form-group'>
                         <label>Password</label>
                         <input
-                            type="password"
-                            name="password"
+                            type='password'
+                            name='password'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.password}
-                            className="form-control"
-                            placeholder="Enter password"
+                            className='form-control'
+                            placeholder='Enter password'
                         />
                     </div>
 
                     {errors.password && touched.password && errors.password}
                     {/* {submitError} */}
-                    <button type="submit" className="btn btn-dark btn-lg btn-block" disabled={isSubmitting}>Register</button>
-                    <p className="forgot-password text-right">
-                        <NavLink className="nav-link" to="/login">Log in</NavLink>
+                    <button type='submit' className='btn btn-dark btn-lg btn-block' disabled={isSubmitting}>Register</button>
+                    <p className='forgot-password text-right'>
+                        <NavLink className='nav-link' to='/login'>Log in</NavLink>
                     </p>
                 </form>
             )}

@@ -1,24 +1,23 @@
-import * as React from 'react'
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Form from '../components/Form';
-import Projects from '../components/Projects';
-import { Loader } from '../components/Loader';
+import Projects from '../components/ProjectList/Projects';
+import { Loader } from '../components/Loader/Loader';
 import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/projectsHandler/projectsReducer';
+import { ProjectCreateModal } from '../components/ProjectCreateModal/ProjectCreateModal';
 
 
-const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading, removeProject, token, ...props }) => {
+const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading, removeProject, isAuth, ...props }) => {
     useEffect(() => {
-        if (!!token) {
+        if (isAuth) {
             fetchProjects()
         }
-    }, [token, fetchProjects])
-    if (!token) return <Redirect to='/login' />
+    }, [isAuth, fetchProjects])
+    if (!isAuth) return <Redirect to='/login' />
     return (
         <>
-            <Form handleSubmit={(fromData) => addProject(fromData.formValue, 'second')} />
+            <ProjectCreateModal submitForm={addProject} />
             <hr />
             {loading
                 ? <Loader />
@@ -31,7 +30,7 @@ const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading,
 const mapStateToProps = state => ({
     loading: state.option.loading,
     projects: state.project.projects,
-    token: state.auth.token
+    isAuth: state.auth.isAuth
 })
 
 export default connect(mapStateToProps, { removeProject, fetchProjects, setCurrentProject, addProject })(Home)

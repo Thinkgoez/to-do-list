@@ -1,5 +1,5 @@
-import { call, put } from "redux-saga/effects"
-import { Api } from "../../api/api"
+import { call, put } from 'redux-saga/effects'
+import { Api } from '../../api/api'
 import TYPES from '../types'
 
 
@@ -11,7 +11,7 @@ export function* fetchNotesSaga(action) {
         let payload = []
         if (res.data) {
             payload = res.data
-        } else if (res.status) {
+        } else if (res.status === 401) {
             yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка авторизации', type: 'danger' } })
         }
         yield put({ type: TYPES.FETCH_NOTES, payload })
@@ -26,7 +26,6 @@ export function* fetchNotesSaga(action) {
 export function* addNoteSaga(action) {
     try {
         const res = yield call(Api.addNote, action.note, action.projectID);
-        console.log(res)
         yield put({
             type: TYPES.ADD_NOTE,
             payload: {

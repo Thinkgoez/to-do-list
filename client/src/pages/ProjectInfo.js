@@ -1,21 +1,21 @@
-import * as React from 'react'
+import React from 'react'
 import { useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import Form from '../../components/Form';
-import { Notes } from '../../components/Notes';
-import { Loader } from '../../components/Loader';
+import Form from '../components/Form';
+import { Notes } from '../components/NoteList/Notes';
+import { Loader } from '../components/Loader/Loader';
 
-import { removeProject } from '../../redux/projectsHandler/projectsReducer';
-import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../../redux/notesHandler/notesReducer';
+import { removeProject } from '../redux/projectsHandler/projectsReducer';
+import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../redux/notesHandler/notesReducer';
 
 
 
 const ProjectInfo = ({
     onChangeCompleteNote, removeNote, addNote, fetchNotes,
-    userID, currentProject, notes, loading,
+    currentProject, notes, loading,
     ...props
 }) => {
     useEffect(() => {
@@ -33,7 +33,7 @@ const ProjectInfo = ({
             {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary'>Settings</NavLink> : null}
             <Form handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
             <hr />
-            {props.loading
+            {loading
                 ? <Loader />
                 : <Notes
                     notes={notes}
@@ -53,14 +53,13 @@ ProjectInfo.propTypes = {
     onChangeCompleteNote: PropTypes.func,
     loading: PropTypes.bool,
     currentProject: PropTypes.object,
-    notes: PropTypes.array
+    notes: PropTypes.arrayOf(PropTypes.object)
 }
 
 const mapS = state => ({
     loading: state.option.loading,
     currentProject: state.project.currentProject,
     notes: state.note.notes,
-    // userID: state.firebase.userID,
 })
 
 export default connect(mapS, { removeProject, addNote, fetchNotes, removeNote, onChangeCompleteNote })(ProjectInfo)
