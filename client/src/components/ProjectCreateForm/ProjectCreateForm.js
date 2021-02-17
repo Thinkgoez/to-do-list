@@ -1,31 +1,32 @@
 import { Formik } from "formik"
 import PropTypes from 'prop-types'
+import * as Yup from 'yup';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
-export const ProjectCreateForm = ({ submitForm, ...props }) => {
+const valSchema = Yup.object().shape({
+    title: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    description: Yup.string()
+        .min(2, 'Too Short!')
+        .required('Required'),
+});
 
-    const validator = (values) => {
-        const errors = {};
-        if (!values.title.trim()) {
-            errors.title = "Shouldn't be empty";
-        }
-        if (!values.description.trim()) {
-            errors.description = "Shouldn't be empty";
-        }
-        return errors;
-    }
-    const handleSubmit = (values, { resetForm }) => {
-        console.log(values);
-        // submitForm(values)
-        resetForm({ values: { title: '', description: '' } })
+export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
+    const handleSubmit = (values) => {
+        submitForm(values)
+        handleClose()
     }
 
     return (
         <Formik
             initialValues={{ title: '', description: '' }}
-            initialErrors={{ title: '', description: '' }}
-            validate={validator}
-            validateOnBlur={false}
+            validationSchema={valSchema}
             onSubmit={handleSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
         >
             {({
                 values,
@@ -36,43 +37,51 @@ export const ProjectCreateForm = ({ submitForm, ...props }) => {
                 setErrors,
                 ...props
             }) => (
-                <>
-                    <form onSubmit={handleSubmit}>
-                        <div className='form-group'>
+                <Form noValidate onSubmit={handleSubmit}>
+                    <Form.Group md="6" controlId="validationFormik01">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            type='text'
+                            name='title'
+                            className='form-control'
+                            placeholder='Введите название нового проекта'
+                            value={values.title}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isInvalid={!!errors.title}
+                        />
+                        <Form.Control.Feedback type="invalid">
                             {errors.title}
-                            <input
-                                type='text'
-                                name='title'
-                                className='form-control'
-                                placeholder='Введите название нового проекта'
-                                value={values.title}
-                                onChange={handleChange}
-                                onBlur={(e) => {
-                                    setErrors(errors.title = '')
-                                    handleBlur(e)
-                                }}
-                            />
-                            <input
-                                type='text'
-                                name='description'
-                                className='form-control'
-                                placeholder='Введите описание проекта'
-                                value={values.description}
-                                onChange={handleChange}
-                                onBlur={(e) => {
-                                    setErrors(errors.description = '')
-                                    handleBlur(e)
-                                }}
-                            />
-                            <button className={'btn'} type='submit'>Submit e-ho-ho-ho</button>
-                        </div>
-                    </form>
-                </>
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group md="6" controlId="validationFormik02">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            as='textarea'
+                            name='description'
+                            className='form-control my-2'
+                            placeholder='Введите описание проекта'
+                            value={values.description}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isInvalid={!!errors.description}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.description}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <div className="d-flex justify-content-between mt-3">
+                        <Button variant="secondary" onClick={handleClose}>Close</Button>
+                        <Button variant="primary" type='submit'>Create</Button>
+                    </div>
+                </Form>
             )}
         </Formik>
     )
 }
 
 ProjectCreateForm.propTypes = {
-    submitForm: PropTypes.func.isRequired
+    submitForm: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
 }

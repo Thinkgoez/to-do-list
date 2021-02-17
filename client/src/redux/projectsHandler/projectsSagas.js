@@ -25,6 +25,7 @@ export function* fetchProjectsSaga(action) {
 export function* addProjectSaga(action) {
     try {
         const res = yield call(Api.addProject, action.project);
+        yield console.log(res)
         yield put({
             type: TYPES.ADD_PROJECT,
             payload: {
@@ -50,7 +51,6 @@ export function* removeProjectSaga(action) {
                 payload: action.projectID
             })
             // yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно удален', type: 'success' } })
-
         }
     } catch (e) {
         console.log(e)
@@ -88,6 +88,7 @@ export function* addUserToProjectSaga(action) {
 }
 
 function setOwnerHelper(project) {
+    // set field "isOwner" for current user
     const strogeToken = localStorage.getItem('auth-token')
     let isOwner = false
     if (strogeToken) {

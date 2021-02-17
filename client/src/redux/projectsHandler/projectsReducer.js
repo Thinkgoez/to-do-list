@@ -45,7 +45,7 @@ export const projectsReducer = (state = initialState, action) => {
 
 
 export const fetchProjects = () => ({ type: TYPES.REQUEST_PROJECTS})
-export const addProject = (title, description) => ({ type: TYPES.REQUEST_ADD_PROJECT, project: { title, description, } }) // followingUsers: [userID]
+export const addProject = (project) => ({ type: TYPES.REQUEST_ADD_PROJECT, project }) // followingUsers: [userID]
 export const removeProject = (projectID) => ({ type: TYPES.REQUEST_REMOVE_PROJECT, projectID })
 export const setCurrentProject = (projectID) => ({ type: TYPES.SET_CURRENT_PROJECT, projectID })
 export const addUserToProject = (project, userID) => ({ type: TYPES.ADD_USER_TO, project, userID })
