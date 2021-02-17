@@ -18,7 +18,6 @@ import ProjectSettings from './pages/ProjectSettings';
 import { clearData } from './redux/projectsHandler/projectsReducer';
 import { logout, getProfileFetch } from './redux/authHandler/authReducer';
 
-// console.log(localStorage.getItem('auth-token'))
 
 const App = ({ getProfileFetch, logout, clearData, isAuth, ...props }) => {
     useEffect(() => {

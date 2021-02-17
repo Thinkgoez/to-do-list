@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import CardColumns from 'react-bootstrap/CardDeck'
 
 import { Project, projectPropType } from '../ProjectItem/Project'
 
@@ -7,7 +8,7 @@ const Projects = ({ setCurrentProject, removeProject, projects, ...props }) => {
     return (
         <>
             { projects.length !== 0 ?
-                <ul className='list-group'>
+                <CardColumns className="row g-2">
                     {projects.map(project => (
                         <Project
                             key={project._id}
@@ -16,7 +17,7 @@ const Projects = ({ setCurrentProject, removeProject, projects, ...props }) => {
                             setProject={setCurrentProject}
                         />
                     ))}
-                </ul>
+                </CardColumns>
                 : <div>Здесь пока нету проектов...</div>
             }
         </>

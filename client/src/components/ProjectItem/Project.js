@@ -1,20 +1,19 @@
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Card from 'react-bootstrap/Card'
+
+// secondary" "success" "info" "dark" 
 
 export const Project = ({ project, setProject, ...props }) => {
     return (
-        <div className={'project'} timeout={800}>
+        <Card className={'m-2'} border="secondary" style={{ width: '22%' }}>
             <NavLink to={`/projects/${project.title}`} onClick={() => setProject(project._id)}>
-                <li className={`d-flex list-group-item note`}>
-                    <div className='d-flex align-items-center'>
-                        <strong>{project.title}</strong>
-                        <small>{project.description}</small>
-                    </div>
-                    <div>
-                    </div>
-                </li>
+                <Card.Body>
+                    <Card.Title>{project.title}</Card.Title>
+                    <Card.Text>{project.description}</Card.Text>
+                </Card.Body>
             </NavLink>
-        </div>
+        </Card>
     )
 }
 
