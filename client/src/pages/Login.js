@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 
 import { login } from '../redux/authHandler/authReducer'
-import { LoginFormikForm } from '../components/LoginFormikForm/LoginFormikForm'
+import { AuthLoginForm } from '../components/AuthLoginForm/AuthLoginForm'
 
 const Login = ({ login, isAuth, ...props }) => { // error
     const handleSubmit = (formData) => {
@@ -17,7 +17,7 @@ const Login = ({ login, isAuth, ...props }) => { // error
                 : <div className='auth'>
                     <div className='outer'>
                         <div className='inner'>
-                            <LoginFormikForm handleSubmit={handleSubmit} /> {/* submitError={error} /> */}
+                            <AuthLoginForm handleSubmit={handleSubmit} /> {/* submitError={error} /> */}
                         </div>
                     </div>
                 </div>

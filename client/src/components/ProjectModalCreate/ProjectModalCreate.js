@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { ProjectCreateForm } from '../ProjectCreateForm/ProjectCreateForm'
 
-export const ProjectCreateModal = ({ ...props }) => {
+export const ProjectModalCreate = ({ ...props }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -14,7 +14,7 @@ export const ProjectCreateModal = ({ ...props }) => {
             <Button variant="primary" onClick={handleShow}>New project</Button>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>Create new project</Modal.Title>
                 </Modal.Header>
                 <Modal.Body><ProjectCreateForm handleClose={handleClose} {...props} /></Modal.Body>

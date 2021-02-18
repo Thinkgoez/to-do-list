@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import Projects from '../components/ProjectList/Projects';
 import { Loader } from '../components/Loader/Loader';
 import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/projectsHandler/projectsReducer';
-import { ProjectCreateModal } from '../components/ProjectCreateModal/ProjectCreateModal';
+import { ProjectModalCreate } from '../components/ProjectModalCreate/ProjectModalCreate';
 
 
 const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading, removeProject, isAuth, ...props }) => {
@@ -17,7 +17,7 @@ const Home = ({ fetchProjects, projects, addProject, setCurrentProject, loading,
     if (!isAuth) return <Redirect to='/login' />
     return (
         <>
-            <ProjectCreateModal submitForm={addProject} />
+            <ProjectModalCreate submitForm={addProject} />
             <hr />
             {loading
                 ? <Loader />
