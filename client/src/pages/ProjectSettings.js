@@ -16,18 +16,18 @@ const ProjectInfo = ({ updateProject, currentProject, removeProject, ...props })
         return (<Redirect to='/' />)
     }
     const handleSubmit = (formData) => {
-        // if(!!formData.userID)
-        //     props.addUserToProject(currentProject, formData.userID)
-        if (!!formData.title)
-            updateProject({ ...currentProject, title: formData.title });
+            updateProject({ _id: currentProject._id, ...formData });
     }
 
     return (
         <div className='settings border'>
-            <h3>Settings {currentProject.title}</h3>
+            <div className='d-flex justify-content-between'>
+                <h3>Settings {currentProject.title}</h3>
+                <button className='btn btn-danger' onClick={() => removeProject(currentProject._id)}>Remove project</button>
+            </div>
             <hr />
-            <ProjectSettingsForm handleSubmit={handleSubmit} title={currentProject.title} />
-            <button className='btn btn-danger' onClick={() => removeProject(currentProject._id)}>Remove project</button>
+            <ProjectSettingsForm handleSubmit={handleSubmit} project={currentProject} />
+
         </div>
     )
 }

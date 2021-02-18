@@ -1,10 +1,13 @@
 import { Formik } from 'formik';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types'
 
-export const ProjectSettingsForm = ({handleSubmit, title, ...props}) => {
+
+export const ProjectSettingsForm = ({ handleSubmit, project: { title, description }, ...props }) => {
     return (
         <Formik
-            initialValues={{ title: '', userID: '' }}
+            initialValues={{ title: '', description }}
             validate={values => {
                 const errors = {};
                 if (values.title === title) {
@@ -12,9 +15,12 @@ export const ProjectSettingsForm = ({handleSubmit, title, ...props}) => {
                 }
                 return errors;
             }}
-            onSubmit={(values, { resetForm }) => {
-                handleSubmit(values)
-                resetForm({ values: { title: '', userID: '' } })
+            onSubmit={(values) => {
+                const newValues = {
+                    title: values.title.trim() ? values.title : title,
+                    description: values.description.trim() ? values.description : description
+                }
+                handleSubmit(newValues)
             }}
         >{({
             values,
@@ -24,39 +30,50 @@ export const ProjectSettingsForm = ({handleSubmit, title, ...props}) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            resetForm,
             ...props
         }) =>
         (
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <label>Title:</label>
-                    <input
+            <Form noValidate onSubmit={handleSubmit}>
+                <Form.Group md="6" controlId="validationFormik01">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
                         type='text'
                         name='title'
+                        className='form-control'
+                        placeholder='Введите название нового проекта'
+                        value={values.title}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.title}
-                        className='form-control'
-                        placeholder='New title'
+                        isInvalid={!!errors.title}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.title}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className='mt-2' md="6" controlId="validationFormik02">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        as='textarea'
+                        name='description'
+                        className='form-control my-2'
+                        placeholder='Введите описание проекта'
+                        value={values.description}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={!!errors.description}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.description}
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <div className='d-flex justify-content-end'>
+                    <Button onClick={resetForm} variant="secondary" className='mx-3'>Reset</Button>
+                    <Button variant="primary" type='submit'>Save</Button>
                 </div>
 
-                {errors.title && touched.title && errors.title}
-                <div className='form-group'>
-                    <label>Add new user to project:</label>
-                    <input
-                        type='text'
-                        name='userID'
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.userID}
-                        className='form-control'
-                        placeholder='Enter userID'
-                    />
-                </div>
-                {errors.userID && touched.userID && errors.userID}
-                <button type='submit' disabled={isSubmitting} className='btn btn-secondary'>Save</button>
-            </form>
+            </Form>
         )
             }
         </Formik>

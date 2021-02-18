@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import Form from '../components/Form';
+import { NoteAddForm } from '../components/NoteAddForm/NoteAddForm';
 import { Notes } from '../components/NoteList/Notes';
 import { Loader } from '../components/Loader/Loader';
 
@@ -30,8 +30,8 @@ const ProjectInfo = ({
     return (
         <>
             <h3>{currentProject.title}</h3>
-            {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary'>Settings</NavLink> : null}
-            <Form handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
+            {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink> : null}
+            <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
             <hr />
             {loading
                 ? <Loader />

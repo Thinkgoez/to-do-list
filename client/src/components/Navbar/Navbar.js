@@ -1,40 +1,33 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import Nav from 'react-bootstrap/Nav'
 
 export const Navbar = ({ isAuth, ...props }) => {
     return (
-        <nav className='navbar navbar-dark navbar-expand-lg bg-primary'>
-            <div className='navbar-brand'>
-                Note App
+        <nav className='navbar navbar-dark navbar-expand-lg bg-primary ps-5'>
+            <div className='navbar-brand'>Note App</div>
+            <div className='navbar-nav'>
+                <Nav className='mr-auto'>
+                    <Nav.Link as={NavLink} to='/' exact>Главная</Nav.Link>
+                    <Nav.Link as={NavLink} to='/about' exact>Информация</Nav.Link>
+                </Nav>
+                <Nav>
+                    {!isAuth
+                        ? <>
+                            <Nav.Link as={NavLink} to='/register'>Зарегистрироватся</Nav.Link>
+                            <Nav.Link as={NavLink} to='/login'>Логинизироваться</Nav.Link>
+                        </>
+                        : <>
+                            {/* <div className='nav-item'><NavLink className='nav-divnk' to='/userInfo'>{props.user.displayName || 'Profile'}</NavLink></div> */}
+                            <div className='nav-item'>
+                                <button className='btn btn-divnk text-white' onClick={() => {
+                                    props.logout()
+                                }}>Совершить попытку выхода</button>
+                            </div>
+                        </>
+                    }
+                </Nav>
             </div>
-
-            <ul className='navbar-nav'>
-                <li className='nav-item'>
-                    <NavLink className='nav-link' exact to='/'>Главная</NavLink>
-                </li>
-                <li className='nav-item'>
-                    <NavLink className='nav-link' to='/about'>Информация</NavLink>
-                </li>
-                {!isAuth
-                    ? <>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/register'>Зарегистрироватся</NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/login'>Логинизироваться</NavLink>
-                        </li>
-                    </>
-                    : <>
-                        {/* <li className='nav-item'><NavLink className='nav-link' to='/userInfo'>{props.user.displayName || 'Profile'}</NavLink></li> */}
-                        <li className='nav-item'>
-                            <button className='btn btn-link text-white' onClick={() => {
-                                props.logout()
-                            }}>Совершить попытку выхода</button>
-                        </li>
-                    </>
-                }
-
-            </ul>
         </nav>
     )
 }

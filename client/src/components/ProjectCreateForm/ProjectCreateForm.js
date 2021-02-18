@@ -55,7 +55,7 @@ export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group md="6" controlId="validationFormik02">
+                    <Form.Group className='mt-2' md="6" controlId="validationFormik02">
                         <Form.Label>Description</Form.Label>
                         <Form.Control
                             as='textarea'

@@ -16,7 +16,10 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
         <Formik
             initialValues={{ email: '', password: '', rememberMe: false }}
             validationSchema={loginSchema}
-            onSubmit={handleSubmit}
+            onSubmit={async (values, {setSubmitting}) => {
+                await handleSubmit(values)
+                setSubmitting(false)
+            }}
         >
             {({
                 values,
