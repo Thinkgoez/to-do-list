@@ -21,9 +21,7 @@ const Alert = ({ visible, type, text, hide }) => {
             <div className={`alert alert-${type || 'warning'} alert-dismissible`}>
                 <strong>Внимание!</strong>
                 {text}
-                <button onClick={hide} type='button' className='close' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
+                <button onClick={hide} type='button' className='btn-close' aria-label='Close' />
             </div>
         </CSSTransition>
     );
