@@ -10,6 +10,7 @@ import { Loader } from '../components/Loader/Loader';
 
 import { removeProject } from '../redux/projectsHandler/projectsReducer';
 import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../redux/notesHandler/notesReducer';
+import { BackButton } from '../components/common/BackButton';
 
 
 
@@ -30,6 +31,7 @@ const ProjectInfo = ({
     return (
         <>
             <h3>{currentProject.title}</h3>
+            <BackButton className='btn btn-secondary float-start my-2' />
             {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink> : null}
             <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
             <hr />

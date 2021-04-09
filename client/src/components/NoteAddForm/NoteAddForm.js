@@ -38,7 +38,7 @@ export const NoteAddForm = ({ handleSubmit, ...props }) => {
                             placeholder='Введите название разметки'
                             value={values.formValue}
                             onChange={handleChange}
-                            autocomplete="off"
+                            autoComplete="off"
                             onBlur={(e) => {
                                 setErrors(errors.formValue = '')
                                 handleBlur(e)

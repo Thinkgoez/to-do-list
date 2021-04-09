@@ -1,11 +1,13 @@
 import axios from 'axios'
 const URL = 'http://localhost:5000'
 
+// console.log(localStorage['auth-token'])
+
 const instance = axios.create({
     baseURL: URL,
-    headers: {
-        'Authorization': localStorage.getItem('auth-token') || ''
-    }
+    // headers: {
+    //     'Authorization': localStorage.getItem('auth-token') || ''
+    // }
 })
 
 export const Api = {
@@ -13,7 +15,11 @@ export const Api = {
         return instance.get(`/tasks/${projectID}`)
     },
     addNote(task, projectID) {
-        return instance.post(`/tasks/${projectID}`, task)
+        return instance.post(`/tasks/${projectID}`, task, {
+            headers: {
+                'Authorization': localStorage.getItem('auth-token') || ''
+            }
+        })
     },
     removeNote(taskID) {
         return instance.delete(`/tasks/${taskID}`)
@@ -33,24 +39,22 @@ export const Api = {
         return instance.get(`/projects/${id}`)
     },
     addProject(project) {
-        return instance.post(`/projects`, project)
+        return instance.post(`/projects`, project, {
+            headers: {
+                'Authorization': localStorage.getItem('auth-token') || ''
+            }
+        })
     },
     removeProject(projectID) {
         return instance.delete(`/projects/${projectID}`)
     },
-    // addUserToProject(project, userID) {
-    //     return axios.patch(`${URL}/projects/${project._id}/.json`, { ...project, followingUsers: [...project.followingUsers, userID] })
-    // },
     updateProject(project) {
         return instance.patch(`/projects/${project._id}`, project)
     },
-    // updateSettings(project, payload) {
-    //     return axios.patch(`${URL}/projects/${project._id}`, { ...project, ...payload })
-    // },
 
     // ****** project API
     getProfile(token) {
-        return axios.get('http://localhost:5000/auth/profile', {
+        return instance.get('http://localhost:5000/auth/profile', {
             headers: { 'Authorization': token }
         })
     },

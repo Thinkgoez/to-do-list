@@ -2,6 +2,7 @@ import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types'
+import { BackButton } from '../common/BackButton';
 
 
 export const ProjectSettingsForm = ({ handleSubmit, project: { title, description }, ...props }) => {
@@ -68,9 +69,13 @@ export const ProjectSettingsForm = ({ handleSubmit, project: { title, descriptio
                         {errors.description}
                     </Form.Control.Feedback>
                 </Form.Group>
-                <div className='d-flex justify-content-end'>
-                    <Button onClick={resetForm} variant="secondary" className='mx-3'>Reset</Button>
-                    <Button variant="primary" type='submit'>Save</Button>
+
+                <div className='d-flex justify-content-between'>
+                    <BackButton />
+                    <div className='d-flex justify-content-end'>
+                        <Button onClick={resetForm} variant="secondary" className='mx-3'>Reset</Button>
+                        <Button variant="primary" type='submit'>Save</Button>
+                    </div>
                 </div>
 
             </Form>
