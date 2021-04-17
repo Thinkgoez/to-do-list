@@ -7,7 +7,6 @@ import {AuthRegisterForm} from '../components/AuthRegisterForm/AuthRegisterForm'
 
 const Register = ({ createUser, token, ...props }) => { // error
     const handleSubmit = (formData) => {
-        // console.log(formData)
         createUser(formData)
     }
     return (

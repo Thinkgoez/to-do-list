@@ -154,5 +154,14 @@ strong{
 .settings{
     padding: 20px;
 }
-  
+
+
+/*********************************************************************** PROJECT CARD */
+.card.writable{
+    background-color: aquamarine;
+}
+
+.card.readonly{
+    background: rgb(119, 255, 171);
+}
   

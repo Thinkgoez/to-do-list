@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { NavLink } from 'react-router-dom';
-import *as Yup from 'yup'
+import * as Yup from 'yup'
 
 let registerSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().required('Required'),
-    userName: Yup.string().required('Required')
+    username: Yup.string().required('Required')
 });
 
 export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
@@ -16,7 +16,10 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
         <Formik
             initialValues={{ email: '', password: '', username: '' }}
             validationSchema={registerSchema}
-            onSubmit={handleSubmit}
+            onSubmit={async (values, {setSubmitting}) => {
+                await handleSubmit(values)
+                setSubmitting(false)
+            }}
         >
             {({
                 values,
@@ -29,8 +32,8 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                 ...props
             }) => (
                 <Form noValidate onSubmit={handleSubmit}>
-                    <h3>Log In</h3>
-                    <Form.Group controlId='formBasicName' className='mb-3'>
+                    <h3>Sign Up</h3>
+                    <Form.Group controlId='formRegName' className='mb-3'>
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type='text'
@@ -45,7 +48,7 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             {errors.username && touched.username && errors.username}
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group controlId='formBasicEmail' className='mb-3'>
+                    <Form.Group controlId='formRegEmail' className='mb-3'>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             type='email'
@@ -60,8 +63,7 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             {errors.email && touched.email && errors.email}
                         </Form.Control.Feedback>
                     </Form.Group>
-
-                    <Form.Group controlId='formBasicPassword' className='mb-3'>
+                    <Form.Group controlId='formRegPassword' className='mb-3'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -76,11 +78,13 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             {errors.password && touched.password && errors.password}
                         </Form.Control.Feedback>
                     </Form.Group>
+                    <NavLink className='nav-link float-end' to='/login'>Log in</NavLink>
                     <Button
                         disabled={isSubmitting}
-                        variant='dark' type='submit'
+                        variant='dark'
+                        type='submit'
                     >Register</Button>
-                    <NavLink className='nav-link float-end' to='/login'>Log in</NavLink>
+
                 </Form>
             )}
         </Formik>

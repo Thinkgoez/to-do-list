@@ -24,16 +24,17 @@ export const Api = {
     removeNote(taskID) {
         return instance.delete(`/tasks/${taskID}`)
     },
-    // updateNote(task, projectID) {
-    //     return axios.patch(`${URL}/tasks/${projectID}/${task._id}`, { ...task, completed: !task.completed })
-    // },
     updateNote(task) {
         return instance.patch(`/tasks/${task._id}`, task)
     },
 
     // ****** project API
     getAllProjects() {
-        return instance.get(`/projects`)
+        return instance.get(`/projects`, {
+            headers: {
+                'Authorization': localStorage.getItem('auth-token') || ''
+            }
+        })
     },
     getProject(id) {
         return instance.get(`/projects/${id}`)
@@ -52,7 +53,7 @@ export const Api = {
         return instance.patch(`/projects/${project._id}`, project)
     },
 
-    // ****** project API
+    // ****** user(auth) API
     getProfile(token) {
         return instance.get('http://localhost:5000/auth/profile', {
             headers: { 'Authorization': token }

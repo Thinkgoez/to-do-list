@@ -19,6 +19,10 @@ const projectsSchema = new Schema({
         type: String,
         default: ''
     },
+    isPublic: {
+        type:  Schema.Types.Mixed,
+        default: false
+    }
 })
 
 module.exports = mongoose.model('projects', projectsSchema)

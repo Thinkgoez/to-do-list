@@ -17,12 +17,13 @@ const valSchema = Yup.object().shape({
 export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
     const handleSubmit = (values) => {
         submitForm(values)
+        console.log(values) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         handleClose()
     }
 
     return (
         <Formik
-            initialValues={{ title: '', description: '' }}
+            initialValues={{ title: '', description: '', isPublic: false }}
             validationSchema={valSchema}
             onSubmit={handleSubmit}
             validateOnChange={false}
@@ -70,6 +71,34 @@ export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
                         <Form.Control.Feedback type="invalid">
                             {errors.description}
                         </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className='mt-2' md="6">
+                        <Form.Label>Access settings</Form.Label>
+                        <Form.Check
+                            type='radio'
+                            name='isPublic'
+                            onChange={handleChange}
+                            id='private'
+                            label='Default(private)'
+                            value={false}
+                            defaultChecked
+                        />
+                        <Form.Check
+                            type='radio'
+                            name='isPublic'
+                            onChange={handleChange}
+                            id='pubReadonly'
+                            label='Public(readonly)'
+                            value='readonly'
+                        />
+                        <Form.Check
+                            type='radio'
+                            name='isPublic'
+                            onChange={handleChange}
+                            id='pubWritable'
+                            label='Public(writable)'
+                            value='writable'
+                        />
                     </Form.Group>
                     <div className="d-flex justify-content-between mt-3">
                         <Button variant="secondary" onClick={handleClose}>Close</Button>

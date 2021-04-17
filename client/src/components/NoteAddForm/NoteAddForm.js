@@ -40,7 +40,7 @@ export const NoteAddForm = ({ handleSubmit, ...props }) => {
                             onChange={handleChange}
                             autoComplete="off"
                             onBlur={(e) => {
-                                setErrors(errors.formValue = '')
+                                setErrors({formValue : ''})
                                 handleBlur(e)
                             }}
                             isInvalid={!!errors.formValue}

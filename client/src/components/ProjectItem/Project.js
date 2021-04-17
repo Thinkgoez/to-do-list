@@ -5,8 +5,12 @@ import Card from 'react-bootstrap/Card'
 // secondary" "success" "info" "dark" 
 
 export const Project = ({ project, setProject, ...props }) => {
+    let cName = ''
+    if(project.isPublic && !project.isOwner){
+        cName += ` ${project.isPublic}`
+    }
     return (
-        <Card className={'m-2'} border="secondary" style={{ width: '22%' }}>
+        <Card className={`m-2${cName}`} border="secondary" style={{ width: '22%' }}>
             <NavLink to={`/projects/${project.title}`} onClick={() => setProject(project._id)}>
                 <Card.Body>
                     <Card.Title>{project.title}</Card.Title>
@@ -24,6 +28,7 @@ export const projectPropType = PropTypes.exact({
     tasks: PropTypes.arrayOf(PropTypes.string),
     owner: PropTypes.string,
     isOwner: PropTypes.bool,
+    isPublic: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     __v: PropTypes.number
 })
 

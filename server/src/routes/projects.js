@@ -5,7 +5,7 @@ const controller = require('../controllers/projects')
 const router = express.Router()
 
 
-router.get('/', controller.getAll)
+router.get('/', passport.authenticate('jwt', { session: false }), controller.getAll)
 router.get('/:id', controller.getByID)
 router.post('/', passport.authenticate('jwt', { session: false }), controller.create)
 router.delete('/:id', controller.remove)

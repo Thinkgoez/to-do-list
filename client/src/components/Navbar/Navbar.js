@@ -18,7 +18,6 @@ export const Navbar = ({ isAuth, ...props }) => {
                             <Nav.Link as={NavLink} to='/login'>Логинизироваться</Nav.Link>
                         </>
                         : <>
-                            {/* <div className='nav-item'><NavLink className='nav-divnk' to='/userInfo'>{props.user.displayName || 'Profile'}</NavLink></div> */}
                             <div className='nav-item'>
                                 <button className='btn btn-divnk text-white' onClick={() => {
                                     props.logout()
