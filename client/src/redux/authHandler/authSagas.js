@@ -35,7 +35,10 @@ export function* registerSaga(action) {
     try {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
         const res = yield call(Api.register, action.userData)
-        yield console.log(res)
+        if(res.status === 201){ // 201?
+            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Успешная регистрация', type: 'success' } })
+            yield put({ type: TYPES.REQUEST_LOGIN_USER, userData: action.userData })
+        }
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
         console.log(error)

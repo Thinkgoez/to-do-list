@@ -17,8 +17,9 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
             initialValues={{ email: '', password: '', username: '' }}
             validationSchema={registerSchema}
             onSubmit={async (values, {setSubmitting}) => {
-                await handleSubmit(values)
+                const res = await handleSubmit(values)
                 setSubmitting(false)
+                console.log(res)
             }}
         >
             {({

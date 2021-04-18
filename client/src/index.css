@@ -158,11 +158,11 @@ strong{
 
 /*********************************************************************** PROJECT CARD */
 .card.writable{
-    background-color: aquamarine;
+    background-color: #ff919b63;
 }
 
 .card.readonly{
-    background: rgb(119, 255, 171);
+    background: #8a8a8a75;
 }
   
 

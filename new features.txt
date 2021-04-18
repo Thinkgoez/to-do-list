@@ -1,4 +1,4 @@
-- add some action after REGISTRATION
++ add some action after REGISTRATION
 - sorting projects/tasks
 - tutorial
 - Time managment?

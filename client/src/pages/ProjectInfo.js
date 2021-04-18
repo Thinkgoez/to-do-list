@@ -28,7 +28,6 @@ const ProjectInfo = ({
         return (<Redirect to='/' />)
     }
     const isWritable = currentProject.isPublic === 'writable' || currentProject.isOwner
-    console.log(currentProject)
     return (
         <>
             <div className='project-title'>
