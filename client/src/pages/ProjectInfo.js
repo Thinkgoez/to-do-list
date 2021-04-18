@@ -27,22 +27,31 @@ const ProjectInfo = ({
     if (Object.keys(currentProject).length === 0) {
         return (<Redirect to='/' />)
     }
+    const isWritable = currentProject.isPublic === 'writable' || currentProject.isOwner
 
     return (
         <>
-            <h3>{currentProject.title}</h3>
-            <BackButton className='btn btn-secondary float-start my-2' />
-            {currentProject.isOwner ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink> : null}
-            <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />
-            <hr />
-            {loading
-                ? <Loader />
-                : <Notes
-                    notes={notes}
-                    onRemove={removeNote}
-                    onCompleteNote={onChangeCompleteNote}
-                />
-            }
+            <div className='project-title'>
+                <h3>{currentProject.title}</h3>
+                <BackButton className='btn btn-secondary my-2' />
+                {currentProject.isOwner
+                    ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink>
+                    : null
+                }
+                {!isWritable || <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />}
+                <hr />
+            </div>
+            <div className='project-container'>
+                {loading
+                    ? <Loader />
+                    : <Notes
+                        isWritable={isWritable}
+                        notes={notes}
+                        onRemove={removeNote}
+                        onCompleteNote={onChangeCompleteNote}
+                    />
+                }
+            </div>
         </>
     )
 }

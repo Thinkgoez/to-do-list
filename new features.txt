@@ -1,2 +1,3 @@
-- Time managment
+- tutorial
+- Time managment?
 - add mini-game

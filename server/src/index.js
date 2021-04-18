@@ -28,7 +28,6 @@ mongoose.connect(keys.mongoDB_URI)
 
 app.use(passport.initialize())
 require('./middleware/passport')(passport)
-// console.log(process.env)
 
 
 app.use(cors())

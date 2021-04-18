@@ -20,7 +20,7 @@ module.exports.getAll = async function (req, res) {
 module.exports.getByID = async function (req, res) {
     try {
         const project = await Project.findById(req.params.id)
-        res.status(200).json(project)
+        res.status(200).json({project})
     } catch (error) {
         errorHandler(res, error)
     }

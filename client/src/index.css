@@ -165,3 +165,11 @@ strong{
     background: rgb(119, 255, 171);
 }
   
+
+.project-title{
+    width: 100%;
+    position: relative;
+}
+.project-container.notes-list{
+    width: 100%;
+}

@@ -11,6 +11,10 @@ const notesSchema = new Schema({
         type: Boolean,
         default: false
     },
+    autor: {
+        type: String,
+        default: 'Goose',
+    },
     // executer: {
     //     ref: 'users',
     //     type: Schema.Types.ObjectId

@@ -1,27 +1,30 @@
 import PropTypes from 'prop-types';
 
-export const Note = ({ note, onRemove, onCompleteNote, ...props }) => {
+export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) => {
     return (
         <li key={note._id} className={`d-flex list-group-item note${note.completed ? ' completed' : ''}`} >
             <div className='d-flex align-items-center'>
-                <input
+                
+                {!isWritable || <input
                     type='checkbox'
                     checked={note.completed}
                     onChange={() => { onCompleteNote({ ...note, completed: !note.completed }) }}
-                />&nbsp;&nbsp;
-                                <div className={'info'}>
+                />}&nbsp;&nbsp;
+
+                <div className={'info'}>
                     <strong>{note.title}</strong>
                     <small>{new Date(note.date).toLocaleString()}</small>
                 </div>
             </div>
             <div>
-                <button
+                {!isWritable || <button
                     type='button'
                     className='btn btn-outline-danger btn-sm'
                     onClick={() => onRemove(note._id)}
                 >
                     &times;  {/* Крестик */}
-                </button>
+                </button>}
+
             </div>
         </li>
     )
