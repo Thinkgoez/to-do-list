@@ -1,3 +1,5 @@
+- add some action after REGISTRATION
+- sorting projects/tasks
 - tutorial
 - Time managment?
 - add mini-game

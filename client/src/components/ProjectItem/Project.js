@@ -26,7 +26,11 @@ export const projectPropType = PropTypes.exact({
     title: PropTypes.string,
     description: PropTypes.string,
     tasks: PropTypes.arrayOf(PropTypes.string),
-    owner: PropTypes.string,
+    owner: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    // {
+    //     id: PropTypes.string,
+    //     username: PropTypes.string
+    // },
     isOwner: PropTypes.bool,
     isPublic: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     __v: PropTypes.number

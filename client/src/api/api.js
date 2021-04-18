@@ -28,7 +28,7 @@ export const Api = {
         return instance.patch(`/tasks/${task._id}`, task)
     },
 
-    // ****** project API
+    // *************************************************************** project API
     getAllProjects() {
         return instance.get(`/projects`, {
             headers: {
@@ -53,7 +53,7 @@ export const Api = {
         return instance.patch(`/projects/${project._id}`, project)
     },
 
-    // ****** user(auth) API
+    // *********************************************************************** user(auth) API
     getProfile(token) {
         return instance.get('http://localhost:5000/auth/profile', {
             headers: { 'Authorization': token }

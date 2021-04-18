@@ -14,7 +14,7 @@ module.exports.login = async function (req, res) {
             // Генерация токена, пароли совпали
             const token = jwt.sign({
                 email: candidate.email,
-                userID: candidate._id
+                userID: candidate._id,
             }, keys.jwt, { expiresIn: 60 * 60 })
 
             res.status(200).json({
@@ -35,7 +35,7 @@ module.exports.login = async function (req, res) {
 }
 
 module.exports.register = async function (req, res) {
-    // email password
+    // email password username
     const candidate = await User.findOne({ email: req.body.email })
     if (candidate) {
         // Пользователь уже зарегистрирован - выдать ошибку

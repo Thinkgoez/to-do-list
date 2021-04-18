@@ -28,11 +28,12 @@ const ProjectInfo = ({
         return (<Redirect to='/' />)
     }
     const isWritable = currentProject.isPublic === 'writable' || currentProject.isOwner
-
+    console.log(currentProject)
     return (
         <>
             <div className='project-title'>
                 <h3>{currentProject.title}</h3>
+                <h4 className='text-black-50'>{currentProject.owner.username}</h4>
                 <BackButton className='btn btn-secondary my-2' />
                 {currentProject.isOwner
                     ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) => {
     return (
         <li key={note._id} className={`d-flex list-group-item note${note.completed ? ' completed' : ''}`} >
-            <div className='d-flex align-items-center'>
+            <div className='d-flex align-items-center w-50'>
                 
                 {!isWritable || <input
                     type='checkbox'
@@ -14,6 +14,7 @@ export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) =
                 <div className={'info'}>
                     <strong>{note.title}</strong>
                     <small>{new Date(note.date).toLocaleString()}</small>
+                    <strong className='m-3 text-secondary'>{note.autor}</strong>
                 </div>
             </div>
             <div>
@@ -37,6 +38,7 @@ export const notePropType = PropTypes.exact({
     date: PropTypes.string,
     completed: PropTypes.bool,
     description: PropTypes.string,
+    autor: PropTypes.string,
     __v: PropTypes.number,
 })
 

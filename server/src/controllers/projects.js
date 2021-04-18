@@ -1,11 +1,12 @@
 const Project = require('../models/Project')
 const Task = require('../models/Task')
-const User = require('../models/User')
+// const User = require('../models/User')
 const errorHandler = require('../utils/errorHandler')
 
 module.exports.getAll = async function (req, res) {
     try {
-        const projects = await Project.find({ $or: [{ isPublic: 'readonly' }, { isPublic: 'writable' }, { owner: req.user.id }] })
+        const projects = await Project.find({ $or: [{ isPublic: 'readonly' }, { isPublic: 'writable' }, { 'owner.id': req.user.id }] })
+        // { $or: [{ isPublic: 'readonly' }, { isPublic: 'writable' }, { owner: req.user.id }] }
         // let projectWithOwnerName = await JSON.parse(JSON.stringify(projects)).map(async (pr) => {
         //     let usOwner = await User.findById(pr.owner)
         //     console.log({...pr})
@@ -38,11 +39,15 @@ module.exports.remove = async function (req, res) {
 }
 module.exports.create = async function (req, res) {
     try {
+        console.log(req.user.username)
         const project = new Project({
             title: req.body.title,
             description: req.body.description,
             isPublic: req.body.isPublic,
-            owner: req.user.id
+            owner: {
+                id: req.user.id,
+                username: req.user.username
+            }
         })
         await project.save()
         res.status(201).json(project)

@@ -92,7 +92,7 @@ function setOwnerHelper(project) {
     const strogeToken = localStorage.getItem('auth-token')
     let isOwner = false
     if (strogeToken) {
-        isOwner = project.owner === jwt_decode(strogeToken).userID
+        isOwner = project.owner.id === jwt_decode(strogeToken).userID
     }
     return { ...project, isOwner }
 }

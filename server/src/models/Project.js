@@ -8,8 +8,14 @@ const projectsSchema = new Schema({
 
     },
     owner: {
-        ref: 'users',
-        type: Schema.Types.ObjectId
+        id: {
+            ref: 'users',
+            type: Schema.Types.ObjectId
+        },
+        username: {
+            type: String,
+            default: 'mr.Goose'
+        }
     },
     tasks: [{
         ref: 'users',
@@ -20,7 +26,7 @@ const projectsSchema = new Schema({
         default: ''
     },
     isPublic: {
-        type:  Schema.Types.Mixed,
+        type: Schema.Types.Mixed,
         default: false
     }
 })
