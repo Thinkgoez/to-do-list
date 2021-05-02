@@ -1,11 +1,11 @@
 import { call, put } from 'redux-saga/effects';
-import { Api } from '../../api/api';
-import TYPES from '../types';
+import { Api } from '../api/api';
+import TYPES from '../actions/actionTypes';
 
 export function* loginSaga(action) {
     try {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-        const res = yield call(Api.login, action.userData)
+        const res = yield call(Api.login, action.payload)
         const token = res.data.token
         yield localStorage.setItem('auth-token', token)
         yield put({ type: TYPES.LOGIN_SUCCESS, payload: { token, isAuth: true } })
@@ -34,7 +34,7 @@ export function* getProfileSaga() {
 export function* registerSaga(action) {
     try {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-        const res = yield call(Api.register, action.userData)
+        const res = yield call(Api.register, action.payload)
         if(res.status === 201){ // 201?
             yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Успешная регистрация', type: 'success' } })
             yield put({ type: TYPES.REQUEST_LOGIN_USER, userData: action.userData })

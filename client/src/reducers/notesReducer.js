@@ -1,4 +1,4 @@
-import TYPES from '../types';
+import TYPES from '../actions/actionTypes';
 
 const initialState = {
     notes: [],
@@ -28,8 +28,3 @@ export const notesReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export const fetchNotes = (projectID) => ({ type: TYPES.REQUEST_NOTES, projectID })
-export const removeNote = (noteID) => ({ type: TYPES.REQUEST_REMOVE_NOTE, noteID })
-export const addNote = (title, projectID) => ({ type: TYPES.REQUEST_ADD_NOTE, note: { title, date: new Date().toJSON(), completed: false }, projectID })
-export const onChangeCompleteNote = (note) => ({ type: TYPES.REQUEST_COMPLETE_NOTE, note })

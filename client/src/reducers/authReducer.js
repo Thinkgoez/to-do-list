@@ -1,4 +1,4 @@
-import TYPES from '../types';
+import TYPES from '../actions/actionTypes';
 
 const initialState = {
     token: null,
@@ -17,9 +17,3 @@ export const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export const setToken = (token) => ({ type: TYPES.SET_TOKEN, token })
-export const logout = () => ({ type: TYPES.REQUEST_LOGOUT })
-export const createUser = (userData) => ({ type: TYPES.REQUEST_CREATE_USER, userData })
-export const login = (email, password) => ({ type: TYPES.REQUEST_LOGIN_USER, userData: { email, password } })
-export const getProfileFetch = () => ({ type: TYPES.REQUEST_PROFILE })

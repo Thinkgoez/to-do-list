@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import { addProject, fetchProjects, removeProject, setCurrentProject } from '../actions/actionCreator';
 import Projects from '../components/ProjectList/Projects';
 import { Loader } from '../components/Loader/Loader';
-import { addProject, fetchProjects, removeProject, setCurrentProject } from '../redux/projectsHandler/projectsReducer';
 import { ProjectModalCreate } from '../components/ProjectModalCreate/ProjectModalCreate';
 
 

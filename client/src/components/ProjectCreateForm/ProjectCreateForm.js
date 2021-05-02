@@ -17,7 +17,6 @@ const valSchema = Yup.object().shape({
 export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
     const handleSubmit = (values) => {
         submitForm(values)
-        console.log(values) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         handleClose()
     }
 

@@ -1,4 +1,4 @@
-import TYPES from '../types';
+import TYPES from '../actions/actionTypes';
 
 const initialState = {
     visible: false,
@@ -16,10 +16,3 @@ export const alertReducer = (state = initialState, action) => {
             return state
     }
 }
-
-export const show = (text, type = 'warning') => ({
-    type: TYPES.SHOW_ALERT,
-    payload: { text, type }
-})
-
-export const hide = () => ({ type: TYPES.HIDE_ALERT })

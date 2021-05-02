@@ -1,5 +1,8 @@
 + add some action after REGISTRATION
+- fix auth error after token became invalid
+- dark mode(theme)
 - sorting projects/tasks
+- admin panel
 - tutorial
 - Time managment?
 - add mini-game

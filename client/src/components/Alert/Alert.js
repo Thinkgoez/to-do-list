@@ -2,8 +2,7 @@ import *as React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
-import { hide } from '../../redux/alertHandler/alertReducer';
-
+import { hide } from '../../actions/actionCreator';
 
 
 const Alert = ({ visible, type, text, hide }) => {

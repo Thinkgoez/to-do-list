@@ -1,4 +1,4 @@
-import TYPES from '../types';
+import TYPES from '../actions/actionTypes';
 
 
 const initialState = {
@@ -42,18 +42,3 @@ export const projectsReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-
-export const fetchProjects = () => ({ type: TYPES.REQUEST_PROJECTS})
-export const addProject = (project) => ({ type: TYPES.REQUEST_ADD_PROJECT, project }) // followingUsers: [userID]
-export const removeProject = (projectID) => ({ type: TYPES.REQUEST_REMOVE_PROJECT, projectID })
-export const setCurrentProject = (projectID) => ({ type: TYPES.SET_CURRENT_PROJECT, projectID })
-export const addUserToProject = (project, userID) => ({ type: TYPES.ADD_USER_TO, project, userID })
-export const updateProject = (project) => ({ type: TYPES.REQUEST_UPDATE_PROJECT, project})
-
-export const clearData = () => ({ type: TYPES.CLEAR_DATA })
-
-
-
-
-

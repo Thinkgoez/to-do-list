@@ -15,8 +15,7 @@ import ProjectInfo from './pages/ProjectInfo';
 // import UserInfo from './pages/UserInfo';
 import ProjectSettings from './pages/ProjectSettings';
 
-import { clearData } from './redux/projectsHandler/projectsReducer';
-import { logout, getProfileFetch } from './redux/authHandler/authReducer';
+import { clearData, getProfileFetch, logout } from './actions/actionCreator';
 
 
 const App = ({ getProfileFetch, logout, clearData, isAuth, ...props }) => {

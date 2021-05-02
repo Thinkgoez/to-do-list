@@ -1,13 +1,12 @@
-import { call, put } from 'redux-saga/effects'
-import { Api } from '../../api/api'
-import TYPES from '../types'
-
+import { call, put } from 'redux-saga/effects';
+import { Api } from '../api/api';
+import TYPES from '../actions/actionTypes';
 
 
 export function* fetchNotesSaga(action) {
     try {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-        const res = yield call(Api.getNotesByProjectID, action.projectID)
+        const res = yield call(Api.getNotesByProjectID, action.payload) // projectID
         let payload = []
         if (res.data) {
             payload = res.data
@@ -25,11 +24,11 @@ export function* fetchNotesSaga(action) {
 
 export function* addNoteSaga(action) {
     try {
-        const res = yield call(Api.addNote, action.note, action.projectID);
+        const res = yield call(Api.addNote, action.payload.note, action.payload.projectID)
         yield put({
             type: TYPES.ADD_NOTE,
             payload: {
-                ...action.note,
+                ...action.payload.note,
                 ...res.data
             }
         })
@@ -40,11 +39,11 @@ export function* addNoteSaga(action) {
 }
 export function* removeNoteSaga(action) {
     try {
-        const res = yield call(Api.removeNote, action.noteID);
+        const res = yield call(Api.removeNote, action.payload) // noteID
         if (res.status === 200) {
             yield put({
                 type: TYPES.REMOVE_NOTE,
-                payload: action.noteID
+                payload: action.payload
             })
         }
     } catch (e) {
@@ -54,11 +53,11 @@ export function* removeNoteSaga(action) {
 }
 export function* changeCompleteSaga(action) {
     try {
-        const res = yield call(Api.updateNote, action.note)
+        const res = yield call(Api.updateNote, action.payload) // note
         if (res.status === 200) {
             yield put({
                 type: TYPES.COMPLETE_NOTE,
-                note: action.note
+                note: action.payload
             })
         }
     } catch (e) {

@@ -1,14 +1,13 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects';
 import jwt_decode from 'jwt-decode';
-import { Api } from '../../api/api'
-import TYPES from '../types'
+import { Api } from '../api/api';
+import TYPES from '../actions/actionTypes';
 
 
-
-export function* fetchProjectsSaga(action) {
+export function* fetchProjectsSaga() {
     try{
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
-        const res = yield call(Api.getAllProjects, action.userID)
+        const res = yield call(Api.getAllProjects)
         let payload = []
         if (res.data) {
             payload = res.data.map(project => setOwnerHelper(project))
@@ -24,12 +23,12 @@ export function* fetchProjectsSaga(action) {
 
 export function* addProjectSaga(action) {
     try {
-        const res = yield call(Api.addProject, action.project);
+        const res = yield call(Api.addProject, action.payload) // project
         yield console.log(res)
         yield put({
             type: TYPES.ADD_PROJECT,
             payload: {
-                ...action.project,
+                ...action.payload,
                 ...setOwnerHelper(res.data)
             }
         })
@@ -38,19 +37,19 @@ export function* addProjectSaga(action) {
             payload: { text: 'Проект был создан!', type: 'success' }
         })
     } catch (e) {
-        console.log(e)
+        console.log(e.response.status)
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении нового проекта', type: 'danger' } })
     }
 }
 export function* removeProjectSaga(action) {
     try {
-        const res = yield call(Api.removeProject, action.projectID);
+        const res = yield call(Api.removeProject, action.payload) // projectID
         if (res.status === 200) {
             yield put({
                 type: TYPES.REMOVE_PROJECT,
-                payload: action.projectID
+                payload: action.payload
             })
-            // yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно удален', type: 'success' } })
+            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно удален', type: 'success' } })
         }
     } catch (e) {
         console.log(e)
@@ -60,11 +59,11 @@ export function* removeProjectSaga(action) {
 
 export function* updateProjectSaga(action) {
     try {
-        const res = yield call(Api.updateProject, action.project);
+        const res = yield call(Api.updateProject, action.payload) // project
         if (res.status === 200) {
             yield put({
                 type: TYPES.CHANGE_SETTINGS,
-                project: { ...action.project }
+                project: { ...action.payload }
             })
         }
     } catch (e) {
@@ -72,20 +71,20 @@ export function* updateProjectSaga(action) {
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при изменении проекта', type: 'danger' } })
     }
 }
-export function* addUserToProjectSaga(action) {
-    try {
-        const res = yield call(Api.addUserToProject, action.project, action.userID)
-        if (res.status === 200) {
-            yield put({
-                type: TYPES.SUCC_ADDING,
-                payload: { project: action.project, userID: action.userID }
-            })
-        }
-    } catch (e) {
-        console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении пользователя', type: 'danger' } })
-    }
-}
+// export function* addUserToProjectSaga(action) {
+//     try {
+//         const res = yield call(Api.addUserToProject, action.payload.project, action.payload.userID)
+//         if (res.status === 200) {
+//             yield put({
+//                 type: TYPES.SUCC_ADDING,
+//                 payload: action.payload
+//             })
+//         }
+//     } catch (e) {
+//         console.log(e)
+//         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении пользователя', type: 'danger' } })
+//     }
+// }
 
 function setOwnerHelper(project) {
     // set field "isOwner" for current user

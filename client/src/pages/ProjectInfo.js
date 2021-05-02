@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
@@ -7,10 +6,9 @@ import { NavLink, Redirect } from 'react-router-dom';
 import { NoteAddForm } from '../components/NoteAddForm/NoteAddForm';
 import { Notes } from '../components/NoteList/Notes';
 import { Loader } from '../components/Loader/Loader';
-
-import { removeProject } from '../redux/projectsHandler/projectsReducer';
-import { addNote, fetchNotes, onChangeCompleteNote, removeNote } from '../redux/notesHandler/notesReducer';
 import { BackButton } from '../components/common/BackButton';
+import { addNote, fetchNotes, onChangeCompleteNote, removeNote, removeProject } from '../actions/actionCreator';
+
 
 
 

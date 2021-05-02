@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
-import { removeProject, addUserToProject, updateProject } from '../redux/projectsHandler/projectsReducer';
+import { removeProject, updateProject } from '../actions/actionCreator';
 import { ProjectSettingsForm } from '../components/ProjectSettingsForm/ProjectSettingsForm'
 
 
@@ -36,7 +36,6 @@ ProjectInfo.propTypes = {
     currentProject: PropTypes.object,
     notes: PropTypes.arrayOf(PropTypes.object),
     removeProject: PropTypes.func,
-    addUserToProject: PropTypes.func,
     updateProject: PropTypes.func,
 }
 
@@ -47,6 +46,6 @@ const mapS = state => ({
     notes: state.note.notes,
 })
 
-export default connect(mapS, { removeProject, addUserToProject, updateProject })(ProjectInfo)
+export default connect(mapS, { removeProject, updateProject })(ProjectInfo)
 
 // Установка отображаемого имени пользователя, оно может быть не уникальным!

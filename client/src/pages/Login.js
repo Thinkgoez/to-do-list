@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 
-import { login } from '../redux/authHandler/authReducer'
+import { login } from '../actions/actionCreator'
 import { AuthLoginForm } from '../components/AuthLoginForm/AuthLoginForm'
 
 const Login = ({ login, isAuth, ...props }) => { // error
