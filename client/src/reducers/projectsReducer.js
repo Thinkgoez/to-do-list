@@ -24,7 +24,7 @@ export const projectsReducer = (state = initialState, action) => {
         case TYPES.SET_CURRENT_PROJECT:
             return {
                 ...state,
-                currentProject: state.projects.find(proj => proj._id === action.projectID),
+                currentProject: state.projects.find(proj => proj._id === action.payload),
             }
         case TYPES.CHANGE_SETTINGS:
             return {

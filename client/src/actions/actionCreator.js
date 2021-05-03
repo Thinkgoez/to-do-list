@@ -43,7 +43,7 @@ export const updatePass = (payload) => ({ type: TYPES.ACTION_UPDATE_PASS, payloa
 export const authActionPassRecovery = (payload) => ({ type: TYPES.AUTH_ACTION_PASS_RECOVERY, payload })
 export const getUserAction = (payload) => ({ type: TYPES.GET_USER_ACTION, payload })
 export const updateUserData = (payload) => ({ type: TYPES.UPDATE_USER_DATA, payload })
-export const onlyForNotAuthorize = (replace) => ({ type: TYPES.ONLY_FOR_NOT_AUTHORIZE_USERS, replace })
+export const onlyForNotAuthorize = (payload) => ({ type: TYPES.ONLY_FOR_NOT_AUTHORIZE_USERS, payload })
 export const headerRequest = (payload) => ({ type: TYPES.HEADER_REQUEST_AUTHORIZE, payload })
 export const clearUserStore = () => ({ type: TYPES.CLEAR_USER_STORE })
 export const clearUserError = () => ({ type: TYPES.CLEAR_USER_ERROR })

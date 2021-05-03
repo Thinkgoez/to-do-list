@@ -14,7 +14,8 @@ const Login = ({ login, isAuth, ...props }) => { // error
         <>
             {isAuth
                 ? <Redirect to={'/'} />
-                : <div className='auth'>
+                : 
+                <div className='auth'>
                     <div className='outer'>
                         <div className='inner'>
                             <AuthLoginForm handleSubmit={handleSubmit} /> {/* submitError={error} /> */}

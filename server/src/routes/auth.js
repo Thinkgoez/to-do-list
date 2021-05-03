@@ -8,5 +8,11 @@ router.post('/login', controller.login)
 router.post('/register', controller.register)
 router.get('/profile', passport.authenticate('jwt', { session: false }), controller.profile)
 
+// USER
+router.post(
+    '/getUser',
+    passport.authenticate('jwt', { session: false }), controller.profile
+);
+
 
 module.exports = router

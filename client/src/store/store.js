@@ -6,7 +6,7 @@ import { alertReducer } from '../reducers/alertReducer'
 import { projectsReducer } from '../reducers/projectsReducer'
 import { optionReducer } from '../reducers/optionReducer'
 import { notesReducer } from '../reducers/notesReducer'
-import { authReducer } from '../reducers/authReducer'
+// import { authReducer } from '../reducers/authReducer'
 import { userReducer } from '../reducers/userReducer'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -16,8 +16,8 @@ const reducers = combineReducers({
     project: projectsReducer,
     note: notesReducer,
     option: optionReducer,
-    auth: authReducer,
-    user: userReducer
+    // auth: authReducer,
+    auth: userReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,4 +1,5 @@
 import { put } from 'redux-saga/effects';
+import { Api } from '../api/api';
 // import * as restController from '../api/rest/restController';
 // import { controller } from '../api/ws/socketController';
 import TYPES from '../actions/actionTypes';
@@ -36,14 +37,18 @@ export function* updatePassSaga(action) {
 
 export function* privateSaga(action) {
     // yield put({ type: TYPES.GET_USER_REQUEST });
-    // try {
-    //     const { data } = yield restController.getUser(action.payload);
-    //     yield put({ type: TYPES.GET_USER_SUCCESS, data: data });
-    //     controller.subscribe(data.id);
-    // }
-    // catch (e) {
-    //     yield put({ type: TYPES.GET_USER_ERROR, error: e.response });
-    // }
+    try {
+        yield Api.getUser(action.payload) // {data}
+        yield put({ type: TYPES.GET_USER_SUCCESS })
+        // controller.subscribe(data.id);
+    }
+    catch (e) {
+        yield put({ type: TYPES.GET_USER_ERROR, error: e.response })
+        if (typeof action.payload === 'function') {
+            yield action.payload()
+        }
+
+    }
 }
 
 

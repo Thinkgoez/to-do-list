@@ -18,7 +18,7 @@ const ProjectInfo = ({
     ...props
 }) => {
     useEffect(() => {
-        if (currentProject._id)
+        if (currentProject?._id)
             fetchNotes(currentProject._id)
     }, [currentProject._id, fetchNotes])
 

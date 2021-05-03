@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import DarkModeToggle from "react-dark-mode-toggle";
 
-export const Navbar = ({ isAuth, ...props }) => {
+const Navbar = ({ isAuth, ...props }) => {
     const [isDarkMode, setIsDarkMode] = useState(() => false);
     const [isDarkMode2, setDarkMode2] = useState(false);
 
@@ -55,3 +55,5 @@ Navbar.propTypes = {
     isAuth: PropTypes.bool,
     logout: PropTypes.func
 }
+
+export default Navbar

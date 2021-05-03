@@ -1,13 +1,13 @@
-import React from 'react';
-import {getUserAction} from '../../actions/actionCreator';
-import {connect} from 'react-redux';
-import Spinner from '../Spinner/Spinner';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getUserAction } from '../../actions/actionCreator';
+import { Loader } from '../Loader/Loader';
 
 
 const PrivateHoc = (Component, props) => {
 
     const mapStateToProps = (state) => {
-        return state.userStore;
+        return state.auth;
     };
 
     const mapDispatchToProps = (dispatch) => {
@@ -16,20 +16,39 @@ const PrivateHoc = (Component, props) => {
         }
     };
 
-    class Hoc extends React.Component {
-        componentDidMount() {
-            if (!this.props.data) {
-                this.props.getUser(this.props.history.replace);
-            }
-        }
-
-        render() {
-            return (<>
-                {this.props.isFetching ? <Spinner/> :
-                    <Component history={this.props.history} match={this.props.match} {...props}/>}
-            </>)
-        }
+    const Hoc = (properties) => {
+        useEffect(() => {
+            // if (!properties.data)
+            properties.getUser(() => {
+                properties.history.replace('/login')
+            });
+        }, [properties.error]);
+        console.log('PrivateHoc:', Component.displayName)
+        // console.log('PrivateHoc:', properties)
+        return (<>
+            {properties.isFetching ? <Loader /> :
+                <Component history={properties.history} match={properties.match} {...props} />}
+        </>)
     }
+
+
+    // class Hoc extends React.Component {
+    //     componentDidMount() {
+
+    //         this.props.getUser(() => {
+    //             this.props.history.replace('/login')
+    //         });
+
+    //     }
+
+    //     render() {
+    //         console.log('PrivateHoc:', Component.displayName)
+    //         return (<>
+    //             {this.props.isFetching ? <Loader /> :
+    //                 <Component history={this.props.history} match={this.props.match} {...props} />}
+    //         </>)
+    //     }
+    // }
 
     return connect(mapStateToProps, mapDispatchToProps)(Hoc);
 };
