@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-// import { Redirect } from 'react-router-dom';
-
 import { addProject, fetchProjects, removeProject, setCurrentProject } from '../actions/actionCreator';
 import Projects from '../components/ProjectList/Projects';
-import { Loader } from '../components/Loader/Loader';
+import ProjectsSorting from '../components/ProjectsSorting/ProjectsSorting';
 import { ProjectModalCreate } from '../components/ProjectModalCreate/ProjectModalCreate';
+import { Loader } from '../components/Loader/Loader';
 
 
 const Home = ({
@@ -18,14 +17,20 @@ const Home = ({
             fetchProjects()
         }
     }, [isError, fetchProjects, isAuth])
-    // if (!isAuth) return <Redirect to='/login' />
+    const [projectsOrder, setProjectsOrder] = useState('descending')
     return (
         <>
-            <ProjectModalCreate submitForm={addProject} />
+            <div className='d-flex justify-content-between'>
+                <ProjectModalCreate submitForm={addProject} />
+                <ProjectsSorting setProjectsOrder={setProjectsOrder} projectsOrder={projectsOrder} />
+            </div>
+
             <hr />
             {loading
                 ? <Loader />
-                : <Projects projects={projects} removeProject={removeProject} setCurrentProject={setCurrentProject} />
+                : <>
+                    <Projects projectsOrder={projectsOrder} projects={projects} removeProject={removeProject} setCurrentProject={setCurrentProject} />
+                </>
             }
         </>
     )

@@ -1,7 +1,8 @@
 + add some action after REGISTRATION
-- fix auth error after token became invalid
++ fix auth error after token became invalid
+- sorting/order projects/tasks
+- to add possibility to add custom projects order? https://react-bootstrap.netlify.app/components/dropdowns/#custom-dropdown-components
 - dark mode(theme)
-- sorting projects/tasks
 - admin panel
 - tutorial
 - Time managment?
