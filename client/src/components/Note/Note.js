@@ -1,33 +1,103 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components'
+
+const ListGroupItem = styled.li`
+    position: relative;
+    display: flex;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    justify-content: space-between;
+    align-items: center;
+    &.completed{
+        background-color: palegreen;
+    }
+    margin-bottom: 1px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+`
+
+const InputCheckbox = styled.input`
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    margin-right: 10px;
+`
+
+const AuthorName = styled.strong`
+    color: #6c757d;
+    margin: 1rem;
+`
+const NoteFlex = styled.div`
+    align-items: center;
+    width: 50%;
+    display: flex;
+`
+
+const DeleteButton = styled.button`
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1rem;
+
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    border-radius: .2rem;
+    color: #dc3545;
+    background-color: #fff;
+    border: 1px solid #dc3545;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    &:hover, &:active{
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+`
+
+const NoteTitle = styled.strong`
+    margin-right: 1rem;
+`
 
 export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) => {
     return (
-        <li key={note._id} className={`d-flex list-group-item note${note.completed ? ' completed' : ''}`} >
-            <div className='d-flex align-items-center w-50'>
-                
-                {!isWritable || <input
+        <ListGroupItem key={note._id} className={`${note.completed ? ' completed' : ''}`} >
+            <NoteFlex>
+                {!isWritable || <InputCheckbox
                     type='checkbox'
                     checked={note.completed}
                     onChange={() => { onCompleteNote({ ...note, completed: !note.completed }) }}
-                />}&nbsp;&nbsp;
+                />}
 
                 <div className={'info'}>
-                    <strong>{note.title}</strong>
+                    <NoteTitle>{note.title}</NoteTitle>
                     <small>{new Date(note.date).toLocaleString()}</small>
-                    <strong className='m-3 text-secondary'>{note.autor}</strong>
+                    <AuthorName>{note.autor}</AuthorName>
                 </div>
-            </div>
+            </NoteFlex>
             <div>
-                {!isWritable || <button
+                {!isWritable || <DeleteButton
                     type='button'
-                    className='btn btn-outline-danger btn-sm'
                     onClick={() => onRemove(note._id)}
                 >
                     &times;  {/* Крестик */}
-                </button>}
+                </DeleteButton>}
 
             </div>
-        </li>
+        </ListGroupItem>
     )
 }
 

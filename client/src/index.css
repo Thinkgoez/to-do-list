@@ -26,6 +26,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     /* background: url(./img/bg1.jpg) repeat; */
     background-color: #273956!important;
+    color: #fff!important;
 }
 
 
@@ -49,23 +50,6 @@ code {
     background-color: palegreen;
 }
 
-.completed .info{
-    position: relative;
-}
-.completed .info::before{
-    content: '';
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-}
-
-
-strong{
-    margin-right: 1rem;
-}
 
 .alert-enter {
     opacity: 0;
@@ -188,7 +172,4 @@ strong{
 .project-title{
     width: 100%;
     position: relative;
-}
-.project-container.notes-list{
-    width: 100%;
 }

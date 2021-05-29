@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import s from './Notes.module.css'
 
 import { Note, notePropType } from '../Note/Note'
 
@@ -11,10 +12,10 @@ export const Notes = ({isWritable, notes, onRemove, onCompleteNote, ...props }) 
     //     }
     // }, [input])
     return (
-        <div className='notes-list'>
+        <div>
             <h3>Task list</h3>
             { notes.length !== 0 ?
-                <ul className='list-group'>
+                <ul className={s.listGroup}>
                     {notes.map(note => (
                         <Note isWritable={isWritable} key={note._id} note={note} onRemove={onRemove} onCompleteNote={onCompleteNote} />
                     ))}

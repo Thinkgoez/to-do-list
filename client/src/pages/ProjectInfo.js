@@ -2,15 +2,25 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
+import styled from 'styled-components'
 
 import { NoteAddForm } from '../components/NoteAddForm/NoteAddForm';
 import { Notes } from '../components/NoteList/Notes';
 import { Loader } from '../components/Loader/Loader';
 import { BackButton } from '../components/common/BackButton';
 import { addNote, fetchNotes, onChangeCompleteNote, removeNote, removeProject } from '../actions/actionCreator';
+import { Button } from '../components/common/Button';
 
+const Hgrey = styled.h4`
+    color: #ccc;
+`
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: center;
 
-
+`
 
 const ProjectInfo = ({
     onChangeCompleteNote, removeNote, addNote, fetchNotes,
@@ -30,12 +40,16 @@ const ProjectInfo = ({
         <>
             <div className='project-title'>
                 <h3>{currentProject.title}</h3>
-                <h4 className='text-black-50'>{currentProject.owner.username}</h4>
-                <BackButton className='btn btn-secondary my-2' />
-                {currentProject.isOwner
-                    ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='btn btn-secondary float-end my-2'>Settings</NavLink>
-                    : null
-                }
+                <Hgrey>{currentProject.owner.username}</Hgrey>
+                <Container>
+                    <BackButton />
+                    {currentProject.isOwner
+                        ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='float-end my-2'>
+                            <Button>Settings</Button>
+                        </NavLink>
+                        : null
+                    }
+                </Container>
                 {!isWritable || <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />}
                 <hr />
             </div>
