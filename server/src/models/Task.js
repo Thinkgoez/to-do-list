@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const notesSchema = new Schema({
+const tasksSchema = new Schema({
     title: {
         type: String,
         required: true,
-
     },
     completed: {
         type: Boolean,
@@ -15,10 +14,6 @@ const notesSchema = new Schema({
         type: String,
         default: 'Goose',
     },
-    // executer: {
-    //     ref: 'users',
-    //     type: Schema.Types.ObjectId
-    // },
     description: {
         type: String,
         default: ''
@@ -32,5 +27,8 @@ const notesSchema = new Schema({
         type: Schema.Types.ObjectId
     }
 })
-
-module.exports = mongoose.model('tasks', notesSchema)
+// executer: {
+    //     ref: 'users',
+    //     type: Schema.Types.ObjectId
+    // },
+module.exports = mongoose.model('tasks', tasksSchema)

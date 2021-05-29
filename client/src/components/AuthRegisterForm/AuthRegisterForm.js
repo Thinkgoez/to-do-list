@@ -44,6 +44,7 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             value={values.username}
                             placeholder='Your name'
                             isInvalid={!!errors.username && touched.username}
+                            autoComplete='off'
                         />
                         <Form.Control.Feedback type='invalid'>
                             {errors.username && touched.username && errors.username}
@@ -59,6 +60,7 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             value={values.email}
                             placeholder='Enter email'
                             isInvalid={!!errors.email && touched.email}
+                            autoComplete='off'
                         />
                         <Form.Control.Feedback type='invalid'>
                             {errors.email && touched.email && errors.email}

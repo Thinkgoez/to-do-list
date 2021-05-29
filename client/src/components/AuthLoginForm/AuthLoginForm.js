@@ -43,13 +43,14 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                             value={values.email}
                             placeholder='Enter email'
                             isInvalid={!!errors.email && touched.email}
+                            autoComplete='off'
                         />
                         <Form.Control.Feedback type='invalid'>
                             {errors.email && touched.email && errors.email}
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId='formBasicPassword' className='mb-3'>
+                    <Form.Group controlId='formBasicPassword' className='mb-4'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -65,14 +66,14 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                         </Form.Control.Feedback>
                     </Form.Group>
                     {/* {submitError} */}
-                    <Form.Group controlId='formBasicCheckbox' className='my-2'>
+                    {/* <Form.Group controlId='formBasicCheckbox' className='my-2'>
                         <Form.Check
                             type='checkbox'
                             name='rememberMe'
                             label='Remember me'
                             onChange={handleChange}
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Button
                         disabled={isSubmitting}
                         variant='dark' type='submit'

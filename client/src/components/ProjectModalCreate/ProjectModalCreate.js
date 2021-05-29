@@ -11,7 +11,8 @@ export const ProjectModalCreate = ({ ...props }) => {
 
     return (
         <div>
-            <Button variant="primary" onClick={handleShow}>New project</Button>
+            {/* <Button onClick={handleShow}>New project</Button> */}
+            <button className="btn-create" onClick={handleShow}>New project</button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>

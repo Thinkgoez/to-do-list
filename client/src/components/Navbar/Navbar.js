@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import Nav from 'react-bootstrap/Nav'
@@ -13,24 +12,25 @@ const Navbar = ({ isAuth, ...props }) => {
     //     setDarkMode2(checked);
     // };
     return (
-        <nav className='navbar navbar-dark navbar-expand-lg bg-primary ps-5'>
+        <nav className='navbar navbar-dark navbar-expand-lg ps-5'>
             <div className='navbar-brand'>Note App</div>
             <div className='navbar-nav'>
                 <Nav className='mr-auto'>
-                    <Nav.Link as={NavLink} to='/' exact>Главная</Nav.Link>
-                    <Nav.Link as={NavLink} to='/about' exact>Информация</Nav.Link>
+                    <Nav.Link as={NavLink} to='/' exact>Home</Nav.Link>
+                    {/* <Nav.Link as={NavLink} to='/about' exact>Info</Nav.Link> */}
                 </Nav>
                 <Nav>
                     {!isAuth
                         ? <>
-                            <Nav.Link as={NavLink} to='/register'>Зарегистрироватся</Nav.Link>
-                            <Nav.Link as={NavLink} to='/login'>Логинизироваться</Nav.Link>
+                            <Nav.Link as={NavLink} to='/register'>Registration</Nav.Link>
+                            <Nav.Link as={NavLink} to='/login'>Login</Nav.Link>
                         </>
                         : <>
                             <div className='nav-item'>
                                 <button className='btn btn-divnk text-white' onClick={() => {
                                     props.logout()
-                                }}>Совершить попытку выхода</button>
+                                }}>Log out</button>
+                                {/* Совершить попытку выхода */}
                             </div>
                         </>
                     }

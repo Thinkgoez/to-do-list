@@ -63,8 +63,9 @@ export function* updateProjectSaga(action) {
         if (res.status === 200) {
             yield put({
                 type: TYPES.CHANGE_SETTINGS,
-                project: { ...action.payload }
+                payload: {...action.payload}
             })
+            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Проект успешно обновлен', type: 'success' } })
         }
     } catch (e) {
         console.log(e)

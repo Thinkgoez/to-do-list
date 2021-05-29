@@ -6,6 +6,7 @@ import { BackButton } from '../common/BackButton';
 
 
 export const ProjectSettingsForm = ({ handleSubmit, project: { title, description }, ...props }) => {
+    console.log(description)
     return (
         <Formik
             initialValues={{ title: '', description }}
@@ -47,6 +48,7 @@ export const ProjectSettingsForm = ({ handleSubmit, project: { title, descriptio
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isInvalid={!!errors.title}
+                        autoComplete='off'
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.title}

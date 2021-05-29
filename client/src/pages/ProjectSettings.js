@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
 import { removeProject, updateProject } from '../actions/actionCreator';
@@ -11,14 +11,15 @@ const ProjectInfo = ({ updateProject, currentProject, removeProject, ...props })
 
     // Не забыть про поле isOwner в проекте
     // Мои проекты - проекты где isOwner === true
+    const { goBack } = useHistory()
 
     if (Object.keys(currentProject).length === 0) {
         return (<Redirect to='/' />)
     }
     const handleSubmit = (formData) => {
-            updateProject({ _id: currentProject._id, ...formData });
+        updateProject({ _id: currentProject._id, ...formData });
+        goBack()
     }
-
     return (
         <div className='settings border'>
             <div className='d-flex justify-content-between'>
@@ -47,5 +48,3 @@ const mapS = state => ({
 })
 
 export default connect(mapS, { removeProject, updateProject })(ProjectInfo)
-
-// Установка отображаемого имени пользователя, оно может быть не уникальным!

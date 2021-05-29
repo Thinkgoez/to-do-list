@@ -29,8 +29,13 @@ export const projectsReducer = (state = initialState, action) => {
         case TYPES.CHANGE_SETTINGS:
             return {
                 ...state,
-                projects: state.projects.map(project => { if (project._id === action.project._id) return action.project; return project }),
-                currentProject: action.project
+                projects: state.projects.map(project => {
+                    if (project._id === action.payload._id) {
+                        return {...project, ...action.payload};
+                    }
+                    return project
+                }),
+                currentProject: {...state.currentProject, ...action.payload}
             }
         case TYPES.CLEAR_DATA:
             return {

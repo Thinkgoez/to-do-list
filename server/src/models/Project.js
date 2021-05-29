@@ -5,7 +5,6 @@ const projectsSchema = new Schema({
     title: {
         type: String,
         required: true,
-
     },
     owner: {
         id: {
