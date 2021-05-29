@@ -29,7 +29,13 @@ const Home = ({
             {loading
                 ? <Loader />
                 : <>
-                    <Projects projectsOrder={projectsOrder} projects={projects} removeProject={removeProject} setCurrentProject={setCurrentProject} />
+                    {/* <Projects projectsOrder={projectsOrder} projects={projects} removeProject={removeProject} setCurrentProject={setCurrentProject} /> */}
+                    <Projects
+                        projectsOrder={projectsOrder}
+                        projects={projects}
+                        removeProject={removeProject}
+                        setCurrentProject={setCurrentProject}
+                    />
                 </>
             }
         </>

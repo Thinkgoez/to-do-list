@@ -1,5 +1,5 @@
 .selectContainer{
-    width: 10.5em;
+    width: 11.5em;
     margin: 0 auto;
     position: relative;
     --padingLR: .75rem;
@@ -21,6 +21,16 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+
+    -webkit-user-select: none; /* Chrome/Safari */ 
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+.selectHeader:active{
+    border: 2px solid #fff;
+    padding: calc(.375rem - 1px) calc(var(--padingLR) - 1px);
 }
 .arrow {
     border: solid #fff;
@@ -65,3 +75,8 @@
 .selectListItem:hover{
     background-color: #6161ff
 }
+.selectListItem:active{
+    background-color: #97ff97;
+    color: #000;
+}
+

@@ -1,23 +1,23 @@
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Card from 'react-bootstrap/Card'
-
+import s from './Project.module.css'
 // secondary" "success" "info" "dark" 
 
 export const Project = ({ project, setProject, ...props }) => {
     let cName = ''
     if(project.isPublic && !project.isOwner){
-        cName += ` ${project.isPublic}`
+        cName += ` ${s[project.isPublic]}`
     }
+    // style={{ width: '22%' }}
     return (
-        <Card className={`m-2${cName}`} border="secondary" style={{ width: '22%' }}>
+        <div className={s.card + cName}>
             <NavLink to={`/projects/${project.title}`} onClick={() => setProject(project._id)}>
-                <Card.Body>
-                    <Card.Title>{project.title}</Card.Title>
-                    <Card.Text>{project.description}</Card.Text>
-                </Card.Body>
+                <div className={s.cardBody}>
+                    <div className={s.cardTitle}>{project.title}</div>
+                    <p>{project.description}</p>
+                </div>
             </NavLink>
-        </Card>
+        </div>
     )
 }
 

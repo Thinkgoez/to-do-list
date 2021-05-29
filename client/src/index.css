@@ -29,24 +29,6 @@ body {
 }
 
 
-.btn-create{
-    color: white;
-    border: 1px solid white;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: .25rem;
-    transition: color .15s;
-    background-color: transparent;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    text-decoration: none;
-}
-
-.card a {
-    color: #000;
-}
 
 .navbar{
     /* background: url(./img/bg2.jpg) repeat; */
@@ -201,17 +183,6 @@ strong{
 
 /*********************************************************************** PROJECT CARD */
 
-body .card{
-    background-color: #97ff97;
-}
-
-.card.writable{
-    background-color: #ea3939;
-}
-
-.card.readonly{
-    background: #8a8a8a75;
-}
   
 
 .project-title{

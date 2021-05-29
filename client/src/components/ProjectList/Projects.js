@@ -1,12 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CardColumns from 'react-bootstrap/CardDeck'
-
+import styled from 'styled-components'
 import { Project, projectPropType } from '../ProjectItem/Project'
+
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto-fit, 1fr);
+    gap: 2rem;
+`
+
 
 const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, ...props }) => {
     let projectsList = projects
-    // this switch ... it shouldn't be here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to refaktor
+    // this switch ... it shouldn't be here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to refaktor... but how...
     switch (projectsOrder) {
         case 'descending':
             projectsList = [...projects].reverse()
@@ -27,16 +35,19 @@ const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, .
     return (
         <>
             { projectsList.length !== 0 ?
-                <CardColumns className="row g-2">
-                    {projectsList.map(project => (
-                        <Project
-                            key={project._id}
-                            project={project}
-                            onRemove={removeProject}
-                            setProject={setCurrentProject}
-                        />
-                    ))}
-                </CardColumns>
+                <Grid>
+                    {/* <CardColumns className="row g-2"> */}
+                        {projectsList.map(project => (
+                            <Project
+                                key={project._id}
+                                project={project}
+                                onRemove={removeProject}
+                                setProject={setCurrentProject}
+                            />
+                        ))}
+                    {/* </CardColumns> */}
+                </Grid>
+
                 : <div>Здесь пока нету проектов...</div>
             }
         </>
