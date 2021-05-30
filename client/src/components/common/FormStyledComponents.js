@@ -27,8 +27,8 @@ const inputStyles = `
         outline: 0;
     }
     &.invalid{
-        border-color: red; 
-}
+        border-color: red;
+    }
 `
 export const FormControl = styled.input`${inputStyles}`
 export const TextArea = styled.textarea`${inputStyles}
@@ -48,6 +48,7 @@ export const Error = styled.div`
     font-weight: 600;
 `
 export const FormGroup = styled.div`
+    margin-bottom: 1rem;
     position: relative;
 `
 export const FormCheck = styled.div`

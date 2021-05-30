@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
 import PropTypes from 'prop-types'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { NavLink } from 'react-router-dom';
 import *as Yup from 'yup'
+
+import { FormGroup, FormLabel } from '../common/FormStyledComponents';
+import { AuthButton, AuthError, AuthLink, AuthInput} from '../common/AuthStyledComponents'
 
 let loginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Required'),
@@ -11,12 +11,13 @@ let loginSchema = Yup.object().shape({
 });
 
 
+
 export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
     return (
         <Formik
             initialValues={{ email: '', password: '', rememberMe: false }}
             validationSchema={loginSchema}
-            onSubmit={async (values, {setSubmitting}) => {
+            onSubmit={async (values, { setSubmitting }) => {
                 await handleSubmit(values)
                 setSubmitting(false)
             }}
@@ -31,28 +32,27 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                 isSubmitting,
                 ...props
             }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{ color: '#000' }}>
                     <h3>Log In</h3>
-                    <Form.Group controlId='formBasicEmail' className='mb-3'>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
+                    <FormGroup>
+                        <FormLabel>Email</FormLabel>
+                        <AuthInput
                             type='email'
                             name='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
-                            placeholder='Enter email'
-                            isInvalid={!!errors.email && touched.email}
                             autoComplete='off'
+                            placeholder='Enter email'
+                            className={!!errors.email && touched.email ? 'invalid' : ''}
+                            isInvalid={!!errors.email && touched.email}
                         />
-                        <Form.Control.Feedback type='invalid'>
-                            {errors.email && touched.email && errors.email}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group controlId='formBasicPassword' className='mb-4'>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
+                        {/* {errors.email && touched.email && <Error>{errors.email}</Error>} */}
+                        <AuthError>{errors.email && touched.email && errors.email}</AuthError>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel>Password</FormLabel>
+                        <AuthInput
                             type='password'
                             name='password'
                             onChange={handleChange}
@@ -60,12 +60,11 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                             value={values.password}
                             placeholder='Enter password'
                             isInvalid={!!errors.password && touched.password}
+                            className={!!errors.password && touched.password ? 'invalid' : ''}
                         />
-                        <Form.Control.Feedback type='invalid' >
-                            {errors.password && touched.password && errors.password}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    {/* {submitError} */}
+                        {/* {errors.password && touched.password && <Error>{errors.password}</Error>} */}
+                        <AuthError>{errors.password && touched.password && errors.password}</AuthError>
+                    </FormGroup>
                     {/* <Form.Group controlId='formBasicCheckbox' className='my-2'>
                         <Form.Check
                             type='checkbox'
@@ -74,12 +73,13 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                             onChange={handleChange}
                         />
                     </Form.Group> */}
-                    <Button
+                    <AuthButton
                         disabled={isSubmitting}
-                        variant='dark' type='submit'
-                    >Sign in</Button>
-                    <NavLink className='nav-link float-end' to='/register'>Register</NavLink>
-                </Form>
+                        type='submit'
+                    >Sign in</AuthButton>
+                    {/* <NavLink className='nav-link float-end' to='/register'>Register</NavLink> */}
+                    <AuthLink to='/register'>Register</AuthLink>
+                </form>
             )}
         </Formik>
     )

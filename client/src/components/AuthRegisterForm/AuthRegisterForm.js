@@ -1,9 +1,11 @@
 import { Formik } from 'formik';
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup'
+
+import { FormGroup, FormLabel } from '../common/FormStyledComponents';
+import { AuthButton, AuthError, AuthLink, AuthInput} from '../common/AuthStyledComponents'
 
 let registerSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Required'),
@@ -16,10 +18,10 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
         <Formik
             initialValues={{ email: '', password: '', username: '' }}
             validationSchema={registerSchema}
-            onSubmit={async (values, {setSubmitting}) => {
+            onSubmit={async (values, { setSubmitting }) => {
                 const res = await handleSubmit(values)
                 setSubmitting(false)
-                console.log(res)
+                // console.log(res)
             }}
         >
             {({
@@ -32,43 +34,42 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                 isSubmitting,
                 ...props
             }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{ color: '#000' }}>
                     <h3>Sign Up</h3>
-                    <Form.Group controlId='formRegName' className='mb-3'>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
+                    <FormGroup>
+                        <FormLabel>Name</FormLabel>
+                        <AuthInput
                             type='text'
                             name='username'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.username}
                             placeholder='Your name'
+                            autoComplete='off'
+                            className={!!errors.username && touched.username ? 'invalid' : ''}
                             isInvalid={!!errors.username && touched.username}
                             autoComplete='off'
                         />
-                        <Form.Control.Feedback type='invalid'>
-                            {errors.username && touched.username && errors.username}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId='formRegEmail' className='mb-3'>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
+                        <AuthError>{errors.username && touched.username && errors.username}</AuthError>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel>Email</FormLabel>
+                        <AuthInput
                             type='email'
                             name='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
-                            placeholder='Enter email'
-                            isInvalid={!!errors.email && touched.email}
                             autoComplete='off'
+                            placeholder='Enter email'
+                            className={!!errors.email && touched.email ? 'invalid' : ''}
+                            isInvalid={!!errors.email && touched.email}
                         />
-                        <Form.Control.Feedback type='invalid'>
-                            {errors.email && touched.email && errors.email}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId='formRegPassword' className='mb-3'>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
+                        <AuthError>{errors.email && touched.email && errors.email}</AuthError>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel>Password</FormLabel>
+                        <AuthInput
                             type='password'
                             name='password'
                             onChange={handleChange}
@@ -76,19 +77,16 @@ export const AuthRegisterForm = ({ handleSubmit, ...props }) => { //submitError,
                             value={values.password}
                             placeholder='Enter password'
                             isInvalid={!!errors.password && touched.password}
+                            className={!!errors.password && touched.password ? 'invalid' : ''}
                         />
-                        <Form.Control.Feedback type='invalid' >
-                            {errors.password && touched.password && errors.password}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <NavLink className='nav-link float-end' to='/login'>Log in</NavLink>
-                    <Button
+                        <AuthError>{errors.password && touched.password && errors.password}</AuthError>
+                    </FormGroup>
+                    <AuthLink to='/login'>Log in</AuthLink>
+                    <AuthButton
                         disabled={isSubmitting}
-                        variant='dark'
                         type='submit'
-                    >Register</Button>
-
-                </Form>
+                    >Register</AuthButton>
+                </form>
             )}
         </Formik>
     )
