@@ -1,8 +1,28 @@
 import { Formik } from "formik"
 import PropTypes from 'prop-types'
 import * as Yup from 'yup';
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import styled from 'styled-components'
+
+import { FormLabel, FormControl, TextArea, Error, FormGroup, CheckBox, BtnPrimary, BtnSecondary } from '../common/FormStyledComponents';
+import FormCheck from "react-bootstrap/esm/FormCheck";
+
+const CheckBoxGroup = styled(FormGroup)`
+    margin-bottom: 1rem;
+`
+
+const BtnClose = styled(BtnSecondary)`
+    color: #000;
+    border-color: #000;
+`
+
+const BtnSave = styled(BtnPrimary)`
+    color: #000;
+    border-color: #000;
+`
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
 
 const valSchema = Yup.object().shape({
     title: Yup.string()
@@ -25,86 +45,92 @@ export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
             initialValues={{ title: '', description: '', isPublic: false }}
             validationSchema={valSchema}
             onSubmit={handleSubmit}
-            validateOnChange={false}
-            validateOnBlur={false}
         >
             {({
                 values,
                 errors,
+                touched,
                 handleChange,
                 handleBlur,
                 handleSubmit,
                 setErrors,
+                handleReset,
                 ...props
             }) => (
-                <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group md="6" controlId="validationFormik01">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control
+                <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl
                             type='text'
                             name='title'
-                            className='form-control'
-                            placeholder='Введите название нового проекта'
+                            className={!!errors.title && touched.title ? 'invalid' : ''}
                             value={values.title}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            isInvalid={!!errors.title}
+                            isInvalid={!!errors.title && touched.title}
                             autoComplete='off'
+                            placeholder='Введите название нового проекта'
+                            value={values.title}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.title}
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                        {errors.title && touched.title && <Error>{errors.title}</Error>}
+                    </FormGroup>
 
-                    <Form.Group className='mt-2' md="6" controlId="validationFormik02">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            as='textarea'
+                    <FormGroup>
+                        <FormLabel>Description</FormLabel>
+                        <TextArea
                             name='description'
-                            className='form-control my-2'
+                            className={!!errors.description && touched.description ? 'invalid' : ''}
                             placeholder='Введите описание проекта'
                             value={values.description}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             isInvalid={!!errors.description}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.description}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className='mt-2' md="6">
-                        <Form.Label>Access settings</Form.Label>
-                        <Form.Check
-                            type='radio'
-                            name='isPublic'
-                            onChange={handleChange}
-                            id='private'
-                            label='Default(private)'
-                            value={false}
-                            defaultChecked
-                        />
-                        <Form.Check
-                            type='radio'
-                            name='isPublic'
-                            onChange={handleChange}
-                            id='pubReadonly'
-                            label='Public(readonly)'
-                            value='readonly'
-                        />
-                        <Form.Check
-                            type='radio'
-                            name='isPublic'
-                            onChange={handleChange}
-                            id='pubWritable'
-                            label='Public(writable)'
-                            value='writable'
-                        />
-                    </Form.Group>
-                    <div className="d-flex justify-content-between mt-3">
-                        <Button variant="secondary" onClick={handleClose}>Close</Button>
-                        <Button variant="primary" type='submit'>Create</Button>
-                    </div>
-                </Form>
+                        {errors.description && touched.description && <Error>{errors.description}</Error>}
+                    </FormGroup>
+                    <CheckBoxGroup>
+                        <FormLabel>Access settings</FormLabel>
+                        <FormCheck>
+                            <CheckBox
+                                type='radio'
+                                name='isPublic'
+                                onChange={handleChange}
+                                id='private'
+
+                                value={false}
+                                defaultChecked
+                            ></CheckBox>
+                            <label htmlFor='private'>Default(private)</label>
+                        </FormCheck>
+                        <FormCheck>
+                            <CheckBox
+                                type='radio'
+                                name='isPublic'
+                                onChange={handleChange}
+                                id='pubReadonly'
+                                value='readonly'
+                            ></CheckBox>
+                            <label htmlFor='pubReadonly'>Public(readonly)</label>
+                        </FormCheck>
+                        <FormCheck>
+                            <CheckBox
+                                 type='radio'
+                                 name='isPublic'
+                                 onChange={handleChange}
+                                 id='pubWritable'
+                                 value='writable'
+                            ></CheckBox>
+                            <label htmlFor='pubWritable'>Public(writable)</label>
+                        </FormCheck>
+                    </CheckBoxGroup>
+                    <ButtonGroup>
+                        <BtnClose type='button' onClick={() => {
+                            handleClose()
+                            handleReset()
+                        }}>Close</BtnClose>
+                        <BtnSave type='submit'>Create</BtnSave>
+                    </ButtonGroup>
+                </form>
             )}
         </Formik>
     )
