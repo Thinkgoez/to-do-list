@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const  Button = styled.button`
-    color: white;
+    color: #fff;
+    cursor: pointer;
     border: 1px solid white;
     padding: .375rem .75rem;
     font-size: 1rem;
@@ -13,7 +14,10 @@ export const  Button = styled.button`
     text-align: center;
     text-decoration: none;
     transition: background-color .15s linear, color .15s linear;
+    transition: color .15s linear,background-color .15s linear,border-color .15s linear,box-shadow .15s linear;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
     &:hover{
         color: #174082;
         background-color: white;
