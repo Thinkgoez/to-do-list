@@ -13,6 +13,7 @@ import { Button } from '../components/common/Button';
 
 const Hgrey = styled.h4`
     color: #ccc;
+    font-size: 1.5rem;
 `
 const Container = styled.div`
     display: flex;

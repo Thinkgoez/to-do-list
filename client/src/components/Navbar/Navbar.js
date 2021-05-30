@@ -1,8 +1,22 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import Nav from 'react-bootstrap/Nav'
+import styled from 'styled-components'
 // import { DarkModeSwitch } from 'react-toggle-dark-mode';
 // import DarkModeToggle from "react-dark-mode-toggle";
+
+import s from './Navbar.module.css'
+import { Button } from '../common/Button'
+
+const BtnLogOut = styled(Button)`
+    &:hover{
+        border-color: #000;
+    }
+    &:active{
+        border-color: #000;
+        color: #000;
+        background-color: #fff;
+    }
+`
 
 const Navbar = ({ isAuth, ...props }) => {
     // const [isDarkMode, setIsDarkMode] = useState(() => false);
@@ -12,24 +26,24 @@ const Navbar = ({ isAuth, ...props }) => {
     //     setDarkMode2(checked);
     // };
     return (
-        <nav className='navbar navbar-dark navbar-expand-lg ps-5'>
-            <div className='navbar-brand'>Note App</div>
-            <div className='navbar-nav'>
-                <Nav className='mr-auto'>
-                    <Nav.Link as={NavLink} to='/' exact>Home</Nav.Link>
+        <nav className={s.navbar}>
+            <div className={s.navbarBrand}>Note App</div>
+            <div className={s.navbarNav}>
+                <div className={s.nav}>
+                    <NavLink to='/' className={s.navLink} exact>Home</NavLink>
                     {/* <Nav.Link as={NavLink} to='/about' exact>Info</Nav.Link> */}
-                </Nav>
-                <Nav>
+                </div>
+                <div className={s.nav}>
                     {!isAuth
                         ? <>
-                            <Nav.Link as={NavLink} to='/register'>Registration</Nav.Link>
-                            <Nav.Link as={NavLink} to='/login'>Login</Nav.Link>
+                            <NavLink to='/register' className={s.navLink}>Registration</NavLink>
+                            <NavLink to='/login' className={s.navLink}>Login</NavLink>
                         </>
                         : <>
-                            <div className='nav-item'>
-                                <button className='btn btn-divnk text-white' onClick={() => {
+                            <div>
+                                <BtnLogOut onClick={() => {
                                     props.logout()
-                                }}>Log out</button>
+                                }}>Log out</BtnLogOut>
                                 {/* Совершить попытку выхода */}
                             </div>
                         </>
@@ -45,7 +59,7 @@ const Navbar = ({ isAuth, ...props }) => {
                         onChange={toggleDarkMode}
                         size={50}
                     /> */}
-                </Nav>
+                </div>
             </div>
         </nav>
     )

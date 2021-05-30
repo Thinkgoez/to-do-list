@@ -6,7 +6,7 @@ import Projects from '../components/ProjectList/Projects';
 import ProjectsSorting from '../components/ProjectsSorting/ProjectsSorting';
 import { ProjectModalCreate } from '../components/ProjectModalCreate/ProjectModalCreate';
 import { Loader } from '../components/Loader/Loader';
-
+import { FlexBTW } from '../components/common/Flex'
 
 const Home = ({
     fetchProjects, projects, isAuth, addProject,
@@ -20,10 +20,10 @@ const Home = ({
     const [projectsOrder, setProjectsOrder] = useState('descending')
     return (
         <>
-            <div className='d-flex justify-content-between'>
+            <FlexBTW>
                 <ProjectModalCreate submitForm={addProject} />
                 <ProjectsSorting setProjectsOrder={setProjectsOrder} projectsOrder={projectsOrder} />
-            </div>
+            </FlexBTW>
 
             <hr />
             {loading

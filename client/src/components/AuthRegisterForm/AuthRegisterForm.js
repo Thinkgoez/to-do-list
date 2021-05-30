@@ -1,7 +1,5 @@
 import { Formik } from 'formik';
 import PropTypes from 'prop-types'
-import Button from 'react-bootstrap/Button'
-import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup'
 
 import { FormGroup, FormLabel } from '../common/FormStyledComponents';

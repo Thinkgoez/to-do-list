@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import PropTypes from 'prop-types'
-import Form from 'react-bootstrap/Form'
+import { Error, FormControl, FormGroup } from '../common/FormStyledComponents'
 
 
 export const NoteAddForm = ({ handleSubmit, ...props }) => {
@@ -29,27 +29,24 @@ export const NoteAddForm = ({ handleSubmit, ...props }) => {
                 setErrors,
                 ...props
             }) => (
-                <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group md='6' controlId='newTask'>
-                        <Form.Control
+                <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <FormControl
                             type='text'
                             name='formValue'
-                            className='form-control'
                             placeholder='Введите название разметки'
                             value={values.formValue}
                             onChange={handleChange}
-                            autoComplete="off"
+                            autoComplete='off'
                             onBlur={(e) => {
-                                setErrors({formValue : ''})
+                                setErrors({ formValue: '' })
                                 handleBlur(e)
                             }}
                             isInvalid={!!errors.formValue}
                         />
-                        <Form.Control.Feedback type='invalid'>
-                            {errors.formValue}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Form>
+                        {errors.formValue && <Error>{errors.title}</Error>}
+                    </FormGroup>
+                </form>
             )}
         </Formik>
     )

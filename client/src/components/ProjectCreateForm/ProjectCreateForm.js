@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import * as Yup from 'yup';
 import styled from 'styled-components'
 
-import { FormLabel, FormControl, TextArea, Error, FormGroup, CheckBox, BtnPrimary, BtnSecondary } from '../common/FormStyledComponents';
-import FormCheck from "react-bootstrap/esm/FormCheck";
+import {
+    FormLabel, FormControl,
+    TextArea, Error, FormGroup, CheckBox, BtnPrimary,
+    BtnSecondary, FormCheck
+} from '../common/FormStyledComponents';
 
 const CheckBoxGroup = styled(FormGroup)`
     margin-bottom: 1rem;
@@ -96,7 +99,6 @@ export const ProjectCreateForm = ({ submitForm, handleClose, ...props }) => {
                                 name='isPublic'
                                 onChange={handleChange}
                                 id='private'
-
                                 value={false}
                                 defaultChecked
                             ></CheckBox>

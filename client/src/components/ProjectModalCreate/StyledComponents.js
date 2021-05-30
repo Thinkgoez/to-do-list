@@ -25,6 +25,7 @@ export const ModalWrapper = styled.div`
 
 `
 export const ModalDialog = styled.div`
+
     visibility: visible;
     position: relative;
     width: auto;
