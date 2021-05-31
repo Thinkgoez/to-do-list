@@ -39,13 +39,13 @@ const ProjectInfo = ({
     const isWritable = currentProject.isPublic === 'writable' || currentProject.isOwner
     return (
         <>
-            <div className='project-title'>
+            <div >
                 <h3>{currentProject.title}</h3>
                 <Hgrey>{currentProject.owner.username}</Hgrey>
                 <Container>
                     <BackButton />
                     {currentProject.isOwner
-                        ? <NavLink to={`/projects/settings/${currentProject.title}/`} className='float-end my-2'>
+                        ? <NavLink to={`/projects/settings/${currentProject.title}/`}>
                             <Button>Settings</Button>
                         </NavLink>
                         : null
@@ -54,7 +54,7 @@ const ProjectInfo = ({
                 {!isWritable || <NoteAddForm handleSubmit={(formData) => addNote(formData.formValue, currentProject._id)} />}
                 <hr />
             </div>
-            <div className='project-container'>
+            <div>
                 {loading
                     ? <Loader />
                     : <Notes

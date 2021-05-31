@@ -1,8 +1,8 @@
 import React from 'react';
+import PulseLoader from "react-spinners/PulseLoader";
 
 export const Loader = () => (
-    <div className='text-center'>
-        <span className='sr-only'>Loading...</span>
-        <div className='spinner-border' role='status' />
+    <div style={{textAlign: 'center', marginTop: '20px'}}>
+        <PulseLoader color="#fff" margin='10px' size='10px' />
     </div>
 )

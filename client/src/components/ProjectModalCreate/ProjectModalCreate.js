@@ -9,7 +9,7 @@ export const ProjectModalCreate = ({ ...props }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleClick = (e) => {
-        if (e.target.closest('.modal-dialog')) return false
+        if (e.target.closest('#modal-dialog')) return false
         handleClose()
     }
     return (
@@ -17,7 +17,7 @@ export const ProjectModalCreate = ({ ...props }) => {
             <Button onClick={handleShow}>New project</Button>
             { show
                 ? <ModalWrapper onClick={handleClick}>
-                    <ModalDialog className='modal-dialog'>
+                    <ModalDialog id='modal-dialog'>
                         <ModalContent>
                             <ModalHeader><h4>Create new project</h4></ModalHeader>
                             <ModalBody><ProjectCreateForm handleClose={handleClose} {...props} /></ModalBody>
