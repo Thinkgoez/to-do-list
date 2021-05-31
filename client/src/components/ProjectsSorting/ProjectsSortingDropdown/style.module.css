@@ -1,0 +1,82 @@
+.selectContainer{
+    width: 11.5em;
+    margin: 0 auto;
+    position: relative;
+    --padingLR: .75rem;
+}
+.selectHeader{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: .375rem var(--padingLR);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+
+    -webkit-user-select: none; /* Chrome/Safari */ 
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+.selectHeader:active{
+    border: 2px solid #fff;
+    padding: calc(.375rem - 1px) calc(var(--padingLR) - 1px);
+}
+.arrow {
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    width: 3px;
+    height: 3px;
+
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+
+    transition: transform .15s ease-in-out;
+}
+
+.opened .arrow{
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition: transform .15s ease-in-out;
+}
+
+.selectListContainer{
+    position:absolute;
+    top: 110%;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+}
+.selectList{
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    border: 1px solid #ced4da;
+    background-color: #273956;
+}
+.selectListItem{
+    padding: 0.4em 0;
+    padding-left: 1em;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+}
+.selectListItem:hover{
+    background-color: #6161ff
+}
+.selectListItem:active{
+    background-color: #97ff97;
+    color: #000;
+}
+

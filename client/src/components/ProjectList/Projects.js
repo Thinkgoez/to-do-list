@@ -12,9 +12,11 @@ const Grid = styled.div`
 `
 
 
-const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, ...props }) => {
-    let projectsList = projects
-    // this switch ... it shouldn't be here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! need to refaktor... but how...
+const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, isOnlyOwn, ...props }) => {
+    let projectsList = [...projects].reverse()
+    // reverse because projects stored in BD like queue, first created has "0" - index
+
+    // this switch ... it shouldn't be here !!! need to refaktor... but how...
     switch (projectsOrder) {
         case 'descending':
             projectsList = [...projects].reverse()
@@ -28,15 +30,16 @@ const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, .
         case 'another':
             projectsList = anotherSort(projectsList)
             break;
-
         default:
             break;
+    }
+    if(isOnlyOwn){
+        projectsList = projectsList.filter(pr => pr.isOwner)
     }
     return (
         <>
             { projectsList.length !== 0 ?
                 <Grid>
-                    {/* <CardColumns className="row g-2"> */}
                         {projectsList.map(project => (
                             <Project
                                 key={project._id}
@@ -45,7 +48,6 @@ const Projects = ({ projectsOrder, setCurrentProject, removeProject, projects, .
                                 setProject={setCurrentProject}
                             />
                         ))}
-                    {/* </CardColumns> */}
                 </Grid>
 
                 : <div>Здесь пока нету проектов...</div>
@@ -59,6 +61,7 @@ Projects.propTypes = {
     projects: PropTypes.arrayOf(projectPropType),
     removeProject: PropTypes.func,
     projectsOrder: PropTypes.string,
+    isOnlyOwn: PropTypes.bool,
 }
 function ownSort(arr) {
     let helper = arr.filter(pr => pr.isOwner)

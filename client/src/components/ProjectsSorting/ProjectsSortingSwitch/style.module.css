@@ -1,0 +1,13 @@
+.switchWrapper{
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+.switch + label{
+    cursor: pointer;
+    padding-left: .5rem;
+}
+
+.switch input{
+    outline: none;
+}

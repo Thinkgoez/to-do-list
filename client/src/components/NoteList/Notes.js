@@ -5,12 +5,6 @@ import s from './Notes.module.css'
 import { Note, notePropType } from '../Note/Note'
 
 export const Notes = ({isWritable, notes, onRemove, onCompleteNote, ...props }) => {
-    // useEffect(() => {
-    //     effect
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [input])
     return (
         <div>
             <h3>Task list</h3>

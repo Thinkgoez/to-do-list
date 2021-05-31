@@ -18,23 +18,24 @@ const Home = ({
         }
     }, [isError, fetchProjects, isAuth])
     const [projectsOrder, setProjectsOrder] = useState('descending')
+    const [isOnlyOwn, setOnlyOwn] = useState(false)
     return (
         <>
             <FlexBTW>
                 <ProjectModalCreate submitForm={addProject} />
-                <ProjectsSorting setProjectsOrder={setProjectsOrder} projectsOrder={projectsOrder} />
+                <ProjectsSorting setProjectsOrder={setProjectsOrder} isOnlyOwn={isOnlyOwn} setOnlyOwn={setOnlyOwn} />
             </FlexBTW>
 
             <hr />
             {loading
                 ? <Loader />
                 : <>
-                    {/* <Projects projectsOrder={projectsOrder} projects={projects} removeProject={removeProject} setCurrentProject={setCurrentProject} /> */}
                     <Projects
                         projectsOrder={projectsOrder}
                         projects={projects}
                         removeProject={removeProject}
                         setCurrentProject={setCurrentProject}
+                        isOnlyOwn={isOnlyOwn}
                     />
                 </>
             }
