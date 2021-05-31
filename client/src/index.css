@@ -23,8 +23,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* background: url(./img/bg1.jpg) repeat; */
-    background-color: #273956!important;
-    color: #fff!important;
+    background-color: #273956;
+    color: #fff;
 }
 h3{
     font-size: 1.75rem;

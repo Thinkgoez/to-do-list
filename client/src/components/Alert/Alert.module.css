@@ -1,6 +1,4 @@
 .alert{
-    /* transition: opacity 350ms ease-out;
-    opacity: 0; */
     position: relative;
     padding: 1rem 1rem;
     margin-bottom: 1rem;
@@ -15,6 +13,21 @@
 }
 .alert strong{
     margin-right: 5px;
+}
+/* .alert.danger{
+    color: #fff;
+    background-color: #ea3939;
+    border-color: #db2e2e;
+} */
+.alert.danger{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert.warning{
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
 

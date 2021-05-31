@@ -2,7 +2,15 @@
 + fix auth error after token became invalid
 + sorting/order projects/tasks
 + layout without bootstrap
-- check index.css and remove useless styles
++ check index.css and remove useless styles
++ to add alert-type, like "danger" or "warning", now there is only "success"(green-based color)
+- to add ability to hide other's projects near projects order
+- task's animation(removing and adding)
+- to add showing auth error via form(now via alert)
+- relayout projectInfo-page, add description, highlight the text (project owner, title)
+- to add ability to change notes(thinking about it)
+- to add responsive & flexible layout
+- to check accessibility
 - dark mode(theme)
 - admin panel
 - tutorial
