@@ -1,4 +1,5 @@
 import axios from 'axios'
+require('dotenv').config()
 const URL = process.env.SERVER_URL || 'http://localhost:5000'
 console.log(process.env)
 
