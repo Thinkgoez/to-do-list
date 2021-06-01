@@ -11,3 +11,37 @@
 .switch input{
     outline: none;
 }
+
+.switchButton{
+    height: 100%;
+    font-weight: 500;
+    letter-spacing: .5px;
+    cursor: pointer;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .25rem;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: .75rem;
+    transition: background-color .15s linear, color .15s linear, box-shadow .2s ease-in;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.switchButton:hover{
+    background-color: #fff;
+    color: #000;
+}
+.switchButton:active{
+    background-color: #fff;
+    box-shadow: 0 0 0 4px #273956 inset;
+    color: #000;
+}
+.switchButton.checked{
+    background-color: #fff;
+    box-shadow: 0 0 0 4px #273956 inset;
+    color: #000;
+}

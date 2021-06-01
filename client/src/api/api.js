@@ -1,7 +1,6 @@
 import axios from 'axios'
 require('dotenv').config()
 const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
-console.log(process.env)
 
 // console.log(localStorage['auth-token'])
 
