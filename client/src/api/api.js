@@ -1,11 +1,14 @@
 import axios from 'axios'
 require('dotenv').config()
-const URL = process.env.SERVER_URL || 'http://localhost:5000'
+const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
 console.log(process.env)
 
 // console.log(localStorage['auth-token'])
 
-const instance = axios.create({ baseURL: URL })
+const instance = axios.create({ baseURL: URL, headers:{
+    'Access-Control-Allow-Origin': URL,
+    'Accept': '*/*',
+} })
 
 instance.interceptors.request.use(config => {
     const token = window.localStorage.getItem('auth-token');
