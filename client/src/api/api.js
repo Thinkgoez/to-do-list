@@ -1,5 +1,6 @@
 import axios from 'axios'
 const URL = process.env.SERVER_URL || 'http://localhost:5000'
+console.log(process.env)
 
 // console.log(localStorage['auth-token'])
 
