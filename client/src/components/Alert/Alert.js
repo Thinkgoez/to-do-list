@@ -18,7 +18,7 @@ const Alert = ({ visible, type ='', text, hide }) => {
                 mountOnEnter
                 unmountOnExit
             >
-                <div className={s.alert + (s ? ' '+  s[type] : '')} >
+                <div className={s.alert + (s[type] ? ' '+  s[type] : '')} >
                     <strong>Внимание!</strong>
                     {text}
                     <button onClick={hide} type='button' className={s.btnClose} aria-label='Close' />
