@@ -17,6 +17,8 @@ export function userReducer(state = initialState, action) {
             return { ...state, token: null, isAuth: false, error: null }
         case TYPES.LOGIN_SUCCESS:
             return { ...state, ...action.payload }
+        // case TYPES.LOGIN_ERROR:
+        //     return { ...state, ...action.payload, isAuth: false }
 
         case TYPES.GET_USER_ERROR: {
             return {

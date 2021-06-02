@@ -9,10 +9,11 @@ export function* loginSaga(action) {
         const token = res.data.token
         yield localStorage.setItem('auth-token', token)
         yield put({ type: TYPES.LOGIN_SUCCESS, payload: { token, isAuth: true } })
-        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
-        console.log(error)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка авторизации', type: 'danger' } })
+        // yield put({ type: TYPES.LOGIN_ERROR, payload: { error: { text: 'Неверный логин или пароль' } } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при логинизации', type: 'danger' } })
+    } finally {
+        yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     }
 }
 
@@ -26,7 +27,6 @@ export function* getProfileSaga() {
         }
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
-        console.log(error)
         localStorage.removeItem("auth-token")
     }
 
@@ -35,13 +35,12 @@ export function* registerSaga(action) {
     try {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: true } })
         const res = yield call(Api.register, action.payload)
-        if(res.status === 201){ // 201?
+        if (res.status === 201) { // 201?
             yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Успешная регистрация', type: 'success' } })
             yield put({ type: TYPES.REQUEST_LOGIN_USER, payload: action.payload })
         }
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
-        console.log(error)
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при регистрации', type: 'danger' } })
     }
 
@@ -51,7 +50,6 @@ export function* logoutSaga() {
         yield localStorage.removeItem('auth-token')
         yield put({ type: TYPES.LOGOUT_SUCCESS })
     } catch (error) {
-        console.log(error)
         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при выходе', type: 'danger' } })
     }
 

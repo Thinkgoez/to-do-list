@@ -11,7 +11,6 @@ let loginSchema = Yup.object().shape({
 });
 
 
-
 export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
     return (
         <Formik
@@ -62,22 +61,12 @@ export const AuthLoginForm = ({ handleSubmit, ...props }) => { //submitError,
                             isInvalid={!!errors.password && touched.password}
                             className={!!errors.password && touched.password ? 'invalid' : ''}
                         />
-                        {/* {errors.password && touched.password && <Error>{errors.password}</Error>} */}
                         <AuthError>{errors.password && touched.password && errors.password}</AuthError>
                     </FormGroup>
-                    {/* <Form.Group controlId='formBasicCheckbox' className='my-2'>
-                        <Form.Check
-                            type='checkbox'
-                            name='rememberMe'
-                            label='Remember me'
-                            onChange={handleChange}
-                        />
-                    </Form.Group> */}
                     <AuthButton
                         disabled={isSubmitting}
                         type='submit'
                     >Sign in</AuthButton>
-                    {/* <NavLink className='nav-link float-end' to='/register'>Register</NavLink> */}
                     <AuthLink to='/register'>Register</AuthLink>
                 </form>
             )}

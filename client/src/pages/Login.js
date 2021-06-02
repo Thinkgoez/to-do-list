@@ -5,23 +5,26 @@ import { connect } from 'react-redux';
 
 import { login } from '../actions/actionCreator'
 import { AuthLoginForm } from '../components/AuthLoginForm/AuthLoginForm'
+import { Loader } from '../components/Loader/Loader';
 
-const Login = ({ login, isAuth, ...props }) => { // error
+const Login = ({ login, isAuth, loading, ...props }) => { // error
     const handleSubmit = (formData) => {
         login(formData.email, formData.password)
     }
     return (
         <>
-            {isAuth
-                ? <Redirect to={'/'} />
-                : 
-                <div className='auth'>
-                    <div className='outer'>
-                        <div className='inner'>
-                            <AuthLoginForm handleSubmit={handleSubmit} /> {/* submitError={error} /> */}
+            {loading
+                ? <Loader />
+                : isAuth
+                    ? <Redirect to={'/'} />
+                    :
+                    <div className='auth'>
+                        <div className='outer'>
+                            <div className='inner'>
+                                <AuthLoginForm handleSubmit={handleSubmit} />
+                            </div>
                         </div>
                     </div>
-                </div>
             }
         </>
     );
@@ -29,15 +32,15 @@ const Login = ({ login, isAuth, ...props }) => { // error
 
 Login.propTypes = {
     login: PropTypes.func,
-    token: PropTypes.string,
-    isAuth: PropTypes.bool
-    // error: PropTypes.object
+    isAuth: PropTypes.bool,
+    loading: PropTypes.bool, // should ne fixed
 }
 
 
 const mapStateToProps = (state) => ({
-    token: state.auth.token,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    generalError: state.auth.error,
+    loading: state.option.loading
 })
 
 export default connect(mapStateToProps, { login })(Login)

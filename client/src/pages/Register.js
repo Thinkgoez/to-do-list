@@ -2,24 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
-import { createUser } from '../actions/actionCreator'
-import {AuthRegisterForm} from '../components/AuthRegisterForm/AuthRegisterForm'
 
-const Register = ({ createUser, token, ...props }) => { // error
+import { createUser } from '../actions/actionCreator'
+import { AuthRegisterForm } from '../components/AuthRegisterForm/AuthRegisterForm'
+import { Loader } from '../components/Loader/Loader';
+
+const Register = ({ createUser, isAuth, loading, ...props }) => { // error
     const handleSubmit = (formData) => {
         createUser(formData)
     }
     return (
         <>
-            { token
-                ? <Redirect to={'/'} />
-                : <div className='auth'>
-                    <div className='outer'>
-                        <div className='inner'>
-                            <AuthRegisterForm handleSubmit={handleSubmit} /> {/*submitError={error} /> */}
+            {loading
+                ? <Loader />
+                : isAuth
+                    ? <Redirect to={'/'} />
+                    : <div className='auth'>
+                        <div className='outer'>
+                            <div className='inner'>
+                                <AuthRegisterForm handleSubmit={handleSubmit} />
+                            </div>
                         </div>
                     </div>
-                </div>
             }
         </>
     );
@@ -30,11 +34,13 @@ const Register = ({ createUser, token, ...props }) => { // error
 
 Register.propTypes = {
     // error: PropTypes.string,
-    token: PropTypes.string,
+    isAuth: PropTypes.bool,
     createUser: PropTypes.func,
+    loading: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
-    token: state.auth.token
+    isAuth: state.auth.isAuth,
+    loading: state.option.loading
 })
 export default connect(mapStateToProps, { createUser })(Register)
