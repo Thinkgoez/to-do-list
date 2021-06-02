@@ -50,6 +50,7 @@ input{
     padding-top: 1.5rem;
     max-width: 1140px;
     margin: 0 auto;
+    padding-bottom: 4rem;
 }
 
 
@@ -66,28 +67,43 @@ input{
     opacity: 0;
 }
 /* ---------------------- */
-/* .note-exit-active{
-    animation: note 800ms ease-out forwards;
+/* --------------- Note Animation --------------- */
+.note-exit-active{
+    animation: note-exit 800ms ease-out forwards;
 }
 .note-enter-active{
-    animation: note 800ms ease-out alternate-reverse;
+    animation: note-enter 800ms ease-out;
 }
 
-@keyframes note{
+@keyframes note-exit{
     0% {
-        transform: translateX(0);
+        transform: translateY(0);
+        opacity: 1;
     }
-
     30% {
         opacity: .7;
-        transform: translateX(30px);
+        transform: translateY(30px);
     }
     100%{
         opacity: 0;
-        transform: translateX(-250px);
+        transform: translateY(-150px);
     }
-} */
-
+}
+@keyframes note-enter{
+    0%{
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+    50% {
+        opacity: .7;
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* ---------------------- */
  /* --------------- AUTH --------------- */
 
 .auth {

@@ -1,21 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import s from './Notes.module.css'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+
+import s from './Notes.module.css'
 import { Note, notePropType } from '../Note/Note'
 
-export const Notes = ({isWritable, notes, onRemove, onCompleteNote, ...props }) => {
+export const Notes = ({ isWritable, notes=[], onRemove, onCompleteNote, ...props }) => {
     return (
         <div>
             <h3>Task list</h3>
-            { notes.length !== 0 ?
-                <ul className={s.listGroup}>
+            {notes.length === 0 && <div>Здесь пока нету заметок...</div>}
+            <TransitionGroup component='ul' className={s.listGroup}>
                     {notes.map(note => (
-                        <Note isWritable={isWritable} key={note._id} note={note} onRemove={onRemove} onCompleteNote={onCompleteNote} />
+                        <CSSTransition
+                            key={note._id}
+                            timeout={500}
+                            classNames='note'
+                        >
+                            <Note
+                                isWritable={isWritable}
+                                note={note}
+                                onRemove={onRemove}
+                                onCompleteNote={onCompleteNote}
+                            />
+                        </CSSTransition>
                     ))}
-                </ul>
-                : <div>Здесь пока нету заметок...</div>
-            }
+                </TransitionGroup>
+            
         </div>
     )
 }
