@@ -12,16 +12,16 @@ import {
 const CheckBoxGroup = styled(FormGroup)`
     margin-bottom: 1rem;
 `
+const btnFromStyles = `
+color: #000;
+border-color: #000;
+&:active{
+    border-color: #fff;
+}`
+const BtnClose = styled(BtnSecondary)`${btnFromStyles}`
 
-const BtnClose = styled(BtnSecondary)`
-    color: #000;
-    border-color: #000;
-`
+const BtnSave = styled(BtnPrimary)`${btnFromStyles}`
 
-const BtnSave = styled(BtnPrimary)`
-    color: #000;
-    border-color: #000;
-`
 const ButtonGroup = styled.div`
     display: flex;
     justify-content: space-between;

@@ -15,12 +15,16 @@ const Hgrey = styled.h4`
     color: #ccc;
     font-size: 1.5rem;
 `
+const TextDescription = styled.span`
+    display: inline-block;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+`
 const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
     align-items: center;
-
 `
 
 const ProjectInfo = ({
@@ -41,6 +45,7 @@ const ProjectInfo = ({
         <>
             <div >
                 <h3>{currentProject.title}</h3>
+                <TextDescription>{currentProject.description}</TextDescription>
                 <Hgrey>{currentProject.owner.username}</Hgrey>
                 <Container>
                     <BackButton />

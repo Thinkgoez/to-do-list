@@ -96,12 +96,18 @@ export const BtnSecondary = styled(Button)`
         background-color: #6c757d;
         border-color: #6c757d;
     }
+    &:active{
+        border-color: #273956;
+    }
 `
 export const BtnPrimary = styled(Button)`
     &:hover{
         color: #000;
         background-color: #97ff97;
         border-color: #6c757d;
+    }
+    &:active{
+        border-color: #273956;
     }
 `
 
