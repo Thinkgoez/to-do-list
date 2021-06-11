@@ -28,16 +28,17 @@ const Navbar = ({ isAuth, ...props }) => {
     return (
         <nav className={s.navbar}>
             <div className={s.navbarBrand}>Note App</div>
-            <div className={s.navbarNav}>
-                <div className={s.nav}>
-                    <NavLink to='/' className={s.navLink} exact>Home</NavLink>
-                    {/* <Nav.Link as={NavLink} to='/about' exact>Info</Nav.Link> */}
-                </div>
-                <div className={s.nav}>
+            <ul className={s.navbarNav}>
+                {isAuth &&
+                    <li className={s.nav}>
+                        <NavLink to='/' className={s.navLink} exact>Home</NavLink>
+                    </li>
+                }
+                <li className={s.nav}>
                     {!isAuth
                         ? <>
-                            <NavLink to='/register' className={s.navLink}>Registration</NavLink>
                             <NavLink to='/login' className={s.navLink}>Login</NavLink>
+                            <NavLink to='/register' className={s.navLink}>Registration</NavLink>
                         </>
                         : <>
                             <div>
@@ -59,8 +60,8 @@ const Navbar = ({ isAuth, ...props }) => {
                         onChange={toggleDarkMode}
                         size={50}
                     /> */}
-                </div>
-            </div>
+                </li>
+            </ul>
         </nav>
     )
 }

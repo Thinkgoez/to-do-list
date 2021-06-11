@@ -3,10 +3,28 @@ import { connect } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+// import { RiDeleteBin5Line } from 'react-icons/ri/RiDeleteBin5Line'
+import { RiDeleteBin5Line } from 'react-icons/ri'
 
 import { removeProject, updateProject } from '../actions/actionCreator';
 import { ProjectSettingsForm } from '../components/ProjectSettingsForm/ProjectSettingsForm'
 import { Button } from '../components/common/Button';
+
+const DeleteBtn = styled(RiDeleteBin5Line)`
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: none;
+    background-color: #dc3545;
+    padding: 5px;
+    border-radius: 10px;
+    
+    &:active{
+        background-color: #96242f;
+        color: #ccc;
+        outline: none;
+    }
+`
 
 const SettignsWrapper = styled.div`
     padding: 20px;
@@ -27,16 +45,40 @@ const BtnRemove = styled(Button)`
         background-color: #bb2d3b;
     }
 `
-
+const ProjectTitle = styled.span`
+    display: inline-block;
+    width: 30vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`
+const H3Flex = styled.h3`
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+`
 const SettingsHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    @media (max-width: 680px){
+        ${DeleteBtn} {
+            display: block;
+        }
+        ${BtnRemove} {
+            display: none;
+        }
+    }
+    @media (max-width: 440px){
+        ${ProjectTitle} {
+            display: none;
+        }
+    }
 `
 
 const ProjectInfo = ({ updateProject, currentProject, removeProject, ...props }) => {
-
-    // Не забыть про поле isOwner в проекте
-    // Мои проекты - проекты где isOwner === true
     const { goBack } = useHistory()
 
     if (Object.keys(currentProject).length === 0) {
@@ -49,8 +91,9 @@ const ProjectInfo = ({ updateProject, currentProject, removeProject, ...props })
     return (
         <SettignsWrapper>
             <SettingsHeader>
-                <h3>Settings {currentProject.title}</h3>
+                <H3Flex>Settings <ProjectTitle>{currentProject.title}</ProjectTitle></H3Flex>
                 <BtnRemove onClick={() => removeProject(currentProject._id)}>Remove project</BtnRemove>
+                <DeleteBtn onClick={() => removeProject(currentProject._id)}>Remove project</DeleteBtn>
             </SettingsHeader>
             <hr />
             <ProjectSettingsForm handleSubmit={handleSubmit} project={currentProject} />

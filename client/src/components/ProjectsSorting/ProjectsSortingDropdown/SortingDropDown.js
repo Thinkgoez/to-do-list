@@ -34,7 +34,7 @@ const SortingDropDown = ({ setProjectsOrder, ...props }) => {
         <div className={`${isOpen ? s.opened : ''}`}>
             <div className={s.selectContainer}>
                 <div className={s.selectHeader} onClick={toggling}>
-                    {selectedOption || orderList[0].title}
+                    <span>{selectedOption || orderList[0].title}</span>
                     <div className={s.arrow}></div>
                 </div>
                 {isOpen && (

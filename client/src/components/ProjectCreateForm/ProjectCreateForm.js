@@ -13,11 +13,12 @@ const CheckBoxGroup = styled(FormGroup)`
     margin-bottom: 1rem;
 `
 const btnFromStyles = `
-color: #000;
-border-color: #000;
-&:active{
-    border-color: #fff;
-}`
+    color: #000;
+    border-color: #000;
+    &:active{
+        border-color: #fff;
+    }
+`
 const BtnClose = styled(BtnSecondary)`${btnFromStyles}`
 
 const BtnSave = styled(BtnPrimary)`${btnFromStyles}`

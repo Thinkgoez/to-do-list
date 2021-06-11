@@ -1,10 +1,13 @@
 .selectContainer{
-    width: 11.5em;
+    width: 20vw;
+    max-width: 11.5em;
+    min-width: 100px;
     margin: 0 auto;
     position: relative;
     --padingLR: .75rem;
 }
 .selectHeader{
+
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -27,6 +30,11 @@
     -ms-user-select: none; /* IE10+ */
     -o-user-select: none;
     user-select: none;
+}
+.selectHeader span{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .selectHeader:active{
     border: 2px solid #fff;

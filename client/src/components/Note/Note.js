@@ -2,15 +2,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 const ListGroupItem = styled.li`
+    width: 100%;
     position: relative;
-    display: flex;
-    padding: .5rem 1rem;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
     color: #212529;
     text-decoration: none;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
-    justify-content: space-between;
-    align-items: center;
     &.completed{
         background-color: palegreen;
     }
@@ -29,17 +32,18 @@ const InputCheckbox = styled.input`
     background-color: initial;
     cursor: default;
     appearance: auto;
-    margin-right: 10px;
 `
 
-const AuthorName = styled.strong`
+const AuthorName = styled.span`
+    font-weight: 700;
     color: #6c757d;
-    margin: 1rem;
 `
+
 const NoteFlex = styled.div`
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    width: 50%;
-    display: flex;
+    gap: max(10px, 1vw);
 `
 
 const DeleteButton = styled.button`
@@ -69,7 +73,31 @@ const DeleteButton = styled.button`
 `
 
 const NoteTitle = styled.strong`
-    margin-right: 1rem;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+`
+const NoteInfo = styled.div`
+    --columns-quantity: 2;
+    display: grid;
+    grid-template-columns: 1fr repeat(var(--columns-quantity), auto);
+    align-items: center;
+    white-space: nowrap;
+    gap: 1rem;
+    
+    @media (max-width: 670px){
+        & span{
+            display: none;
+        }
+        --columns-quantity: 1;
+    }
+    @media (max-width: 570px){
+        & small{
+            display: none;
+        }
+        --columns-quantity: 0;
+    }
 `
 
 export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) => {
@@ -82,11 +110,11 @@ export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) =
                     onChange={() => { onCompleteNote({ ...note, completed: !note.completed }) }}
                 />}
 
-                <div className={'info'}>
+                <NoteInfo>
                     <NoteTitle>{note.title}</NoteTitle>
                     <small>{new Date(note.date).toLocaleString()}</small>
                     <AuthorName>{note.autor}</AuthorName>
-                </div>
+                </NoteInfo>
             </NoteFlex>
             <div>
                 {!isWritable || <DeleteButton
@@ -95,7 +123,6 @@ export const Note = ({ isWritable, note, onRemove, onCompleteNote, ...props }) =
                 >
                     &times;  {/* Крестик */}
                 </DeleteButton>}
-
             </div>
         </ListGroupItem>
     )

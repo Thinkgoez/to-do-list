@@ -10,6 +10,7 @@ import { FormLabel, FormControl, TextArea, Error, BtnSecondary, BtnPrimary } fro
 const SettingsButtons = styled.div`
     display: flex;
     justify-content: space-between;
+    aling-items: center;
 `
 
 export const ProjectSettingsForm = ({ handleSubmit, project: { title, description }, ...props }) => {

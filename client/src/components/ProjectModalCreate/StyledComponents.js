@@ -11,26 +11,24 @@ const show = keyframes`
 
 export const ModalWrapper = styled.div`
     display: block;
-    padding-left: 17px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 3070;
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
     outline: 0;
     background-color: rgba(0,0,0,.5);
-
 `
 export const ModalDialog = styled.div`
-
     visibility: visible;
     position: relative;
-    width: auto;
     max-width: 500px;
-    margin: 1.75rem auto;
+    width: 80vw;
+    margin: 1.75vw auto;
+    margin: 0 auto;
     pointer-events: none;
 
     animation: .3s ${show} ease-out;
