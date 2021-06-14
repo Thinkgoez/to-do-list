@@ -36,6 +36,7 @@ export const ModalDialog = styled.div`
 export const ModalContent = styled.div`
     z-index: 3071;
     position: relative;
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
     width: 100%;
