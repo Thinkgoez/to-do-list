@@ -1,13 +1,13 @@
-import { Formik } from 'formik'
-import PropTypes from 'prop-types'
-import { Error, FormControl, FormGroup } from '../common/FormStyledComponents'
-
+import PropTypes from "prop-types";
+import { Formik } from "formik";
+import { IoSend } from "react-icons/io5";
+import { Error, FormControl, FormGroup, SendButton } from "../common/FormStyledComponents";
 
 export const NoteAddForm = ({ handleSubmit, ...props }) => {
     return (
         <Formik
-            initialValues={{ formValue: '' }}
-            validate={values => {
+            initialValues={{ formValue: "" }}
+            validate={(values) => {
                 const errors = {};
                 if (!values.formValue.trim()) {
                     errors.formValue = "Shouldn't be empty";
@@ -16,13 +16,14 @@ export const NoteAddForm = ({ handleSubmit, ...props }) => {
             }}
             validateOnBlur={false}
             onSubmit={(values, { resetForm }) => {
-                handleSubmit(values)
-                resetForm({ values: { formValue: '' } })
+                handleSubmit(values);
+                resetForm({ values: { formValue: "" } });
             }}
         >
             {({
                 values,
                 errors,
+                touched,
                 handleChange,
                 handleBlur,
                 handleSubmit,
@@ -32,26 +33,29 @@ export const NoteAddForm = ({ handleSubmit, ...props }) => {
                 <form onSubmit={handleSubmit}>
                     <FormGroup>
                         <FormControl
-                            type='text'
-                            name='formValue'
-                            placeholder='Введите название разметки'
+                            type="text"
+                            name="formValue"
+                            placeholder="Введите название разметки"
                             value={values.formValue}
                             onChange={handleChange}
-                            autoComplete='off'
+                            autoComplete="off"
                             onBlur={(e) => {
-                                setErrors({ formValue: '' })
-                                handleBlur(e)
+                                setErrors({ formValue: "" });
+                                handleBlur(e);
                             }}
-                            isInvalid={!!errors.formValue}
+                            // isInvalid={!!errors.formValue}
                         />
-                        {errors.formValue && <Error>{errors.title}</Error>}
+                        {errors.formValue && <Error>{errors.formValue}</Error>}
+                        {values.formValue && <SendButton type='submit'>
+                            <IoSend />
+                        </SendButton>}
                     </FormGroup>
                 </form>
             )}
         </Formik>
-    )
-}
+    );
+};
 
 NoteAddForm.propTypes = {
-    handleSubmit: PropTypes.func.isRequired
-}
+    handleSubmit: PropTypes.func.isRequired,
+};

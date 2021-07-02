@@ -110,5 +110,32 @@ export const BtnPrimary = styled(Button)`
         border-color: #273956;
     }
 `
+export const SendButton = styled.button`
+    cursor: pointer;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
 
+    position: absolute;
+    color: #273956;
+    right: 0;
+    top: 2px;
+    background: transparent;
+    border-color: transparent;
+    transition: color .15s linear, background-color .15s linear, border-color .15s linear,box-shadow .15s linear;
+    &:hover{
+        border-left-color: #6c757d;
+    }
+    &:disabled{
+        color: #ccc;
+    }
+`
 ;

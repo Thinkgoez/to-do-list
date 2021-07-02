@@ -8,11 +8,11 @@
 + to add some style to switch(only own projects) on the main page
 + task's animation(removing and adding)
 + to add some action during auth requests
-- to add sendButton for mobiles to new notes input
++ to add sendButton for mobiles to new notes input
 + to replace button on the login/reg pages
 - some idea about click on login/reg link, to fullfill starting left
 - to add showing auth error via form(now via alert)
-- relayout projectInfo-page, add description, highlight the text (project owner, title)
+- redesign projectInfo-page
 - to add ability to change notes(thinking about it)
 + to add responsive & flexible layout
 - to add "remember me" to Login form
@@ -28,4 +28,5 @@
 - to add some tests
 - to fix problem with create-modal-form (http://i.prntscr.com/hG6wCb3uTLCmlduqtpuvrw.png)
 - to add "info" button to note, which open modal(?) with more info about the note
-- to fix problem with big project's/tasks description and small-size screns
+- to fix problem with big project's/tasks description for small screens
+- to rewrite Readme file
