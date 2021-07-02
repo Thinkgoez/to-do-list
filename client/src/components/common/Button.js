@@ -13,8 +13,7 @@ export const  Button = styled.button`
     line-height: 1.5;
     text-align: center;
     text-decoration: none;
-    transition: background-color .15s linear, color .15s linear;
-    transition: color .15s linear,background-color .15s linear,border-color .15s linear,box-shadow .15s linear;
+    transition: color .15s linear, background-color .15s linear, border-color .15s linear,box-shadow .15s linear;
     box-sizing: border-box;
     -webkit-user-select: none;
     user-select: none;

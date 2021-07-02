@@ -5,6 +5,7 @@ import { FormControl } from './FormStyledComponents'
 
 export const AuthButton = styled(Button)`
     background-color: #1a1e21;
+    float: right;
     &:hover{
         border-color: #1a1e21;
         color: #1a1e21;
@@ -29,10 +30,15 @@ export const AuthInput = styled(FormControl)`
     }
 `
 export const AuthLink = styled(NavLink)`
-    float: right;
+    float: left;
     color: #0a58ca;
+    border: 1px solid transparent;
     display: block;
     padding: .5rem 1rem;
     text-decoration: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    transition: color .15s linear, border-color .15s linear, box-shadow .15s linear;
+    &:hover{
+        border-color: #0a58ca;
+        box-shadow: 1px 0 0 #0a58ca inset;
+    }
 `
