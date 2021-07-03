@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-// import { RiDeleteBin5Line } from 'react-icons/ri/RiDeleteBin5Line'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 
 import { removeProject, updateProject } from '../actions/actionCreator';

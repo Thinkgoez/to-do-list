@@ -169,3 +169,7 @@ input{
     color: #167bff;
 } */
 /*---------------------------*/
+.errorFallback{
+    padding-top: 1rem;
+    text-align: center;
+}

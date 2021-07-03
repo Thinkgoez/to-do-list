@@ -24,7 +24,6 @@ export function* fetchProjectsSaga() {
 export function* addProjectSaga(action) {
     try {
         const res = yield call(Api.addProject, action.payload) // project
-        yield console.log(res)
         yield put({
             type: TYPES.ADD_PROJECT,
             payload: {
