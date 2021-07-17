@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import { clearData, getProfileFetch, logout } from "./actions/actionCreator";
 // import UserInfo from './pages/UserInfo';
 const Alert = React.lazy(() => import("./components/Alert/Alert"));
+const Alert2 = React.lazy(() => import("./components/Alert/Alert2"));
 const About = React.lazy(() => import("./pages/About"));
 const ProjectInfo = React.lazy(() => import("./pages/ProjectInfo"));
 const ProjectSettings = React.lazy(() => import("./pages/ProjectSettings"));
@@ -41,7 +42,7 @@ const App = ({
                 <Navbar isAuth={isAuth} logout={handleLogout} />
                 <div className="container pt-4">
                     <Suspense fallback={<Loader />}>
-                        <Alert />
+                        {/* <Alert /> */}
                         <Switch>
                             <Route
                                 path={"/"}
@@ -67,6 +68,7 @@ const App = ({
                                 component={PrivateHoc(ProjectInfo)}
                             />
                         </Switch>
+                        <Alert2 />
                     </Suspense>
                 </div>
             </BrowserRouter>

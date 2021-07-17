@@ -173,3 +173,26 @@ input{
     padding-top: 1rem;
     text-align: center;
 }
+
+
+/*---------------------------------*/
+div.Toastify__toast--success {
+    color: #0f5132;
+    background: #d1e7dd;
+    border-color: #badbcc;
+}
+div.Toastify__toast--success .Toastify__progress-bar {
+    background: #0f5132;
+    border-color: #badbcc;
+}
+div .Toastify__close-button > svg {
+    fill: #273956;
+}
+div.Toastify__toast--error {
+    color: #721c24;
+    background: #f8d7da;
+    border-color: #f5c6cb;
+}
+div.Toastify__toast--error .Toastify__progress-bar {
+    background: #721c24;
+}

@@ -11,7 +11,6 @@
 + to add sendButton for mobiles to new notes input
 + to replace button on the login/reg pages
 - some idea about click on login/reg link, to fullfill starting left
-- to add showing auth error via form(now via alert)
 - redesign projectInfo-page
 - to add ability to change notes(thinking about it)
 + to add responsive & flexible layout
@@ -21,7 +20,8 @@
 - dark mode(theme)
 - admin panel
 - to add searching projects
-- relayout alert(now it moves other content, before apear, after disapear)
++ relayout alert(now it moves other content, before apear, after disapear)
++ add new alert
 - Time managment?
 - add mini-game
 - tutorial
@@ -30,3 +30,4 @@
 - to add "info" button to note, which open modal(?) with more info about the note
 - to fix problem with big project's/tasks description for small screens
 - to rewrite Readme file
+- implement web-sockets

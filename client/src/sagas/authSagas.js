@@ -11,7 +11,7 @@ export function* loginSaga(action) {
         yield put({ type: TYPES.LOGIN_SUCCESS, payload: { token, isAuth: true } })
     } catch (error) {
         // yield put({ type: TYPES.LOGIN_ERROR, payload: { error: { text: 'Неверный логин или пароль' } } })
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при логинизации', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при логинизации', type: 'error' } })
     } finally {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     }
@@ -41,7 +41,7 @@ export function* registerSaga(action) {
         }
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при регистрации', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка при регистрации', type: 'error' } })
     }
 
 }
@@ -50,7 +50,7 @@ export function* logoutSaga() {
         yield localStorage.removeItem('auth-token')
         yield put({ type: TYPES.LOGOUT_SUCCESS })
     } catch (error) {
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при выходе', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при выходе', type: 'error' } })
     }
 
 }

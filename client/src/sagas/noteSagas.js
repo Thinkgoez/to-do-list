@@ -11,13 +11,13 @@ export function* fetchNotesSaga(action) {
         if (res.data) {
             payload = res.data
         } else if (res.status === 401) {
-            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка авторизации', type: 'danger' } })
+            yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Ошибка авторизации', type: 'error' } })
         }
         yield put({ type: TYPES.FETCH_NOTES, payload })
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
         console.log(error)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось загрузить задачи', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось загрузить задачи', type: 'error' } })
     }
 
 }
@@ -34,7 +34,7 @@ export function* addNoteSaga(action) {
         })
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось добавить новое задачу', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось добавить новое задачу', type: 'error' } })
     }
 }
 export function* removeNoteSaga(action) {
@@ -48,7 +48,7 @@ export function* removeNoteSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось удалить задачу', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось удалить задачу', type: 'error' } })
     }
 }
 export function* changeCompleteSaga(action) {
@@ -62,6 +62,6 @@ export function* changeCompleteSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось изменить задачу', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Не удалось изменить задачу', type: 'error' } })
     }
 }

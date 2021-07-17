@@ -16,7 +16,7 @@ export function* fetchProjectsSaga() {
         yield put({ type: TYPES.CHANGE_LOADER, payload: { loading: false } })
     } catch (error) {
         console.log(error)
-        yield put({type: TYPES.REQUEST_ERROR, payload: { text: 'Возникла ошибка при загрузки проектов', type: 'danger' }})
+        yield put({type: TYPES.REQUEST_ERROR, payload: { text: 'Возникла ошибка при загрузки проектов', type: 'error' }})
     }
     
 }
@@ -37,7 +37,7 @@ export function* addProjectSaga(action) {
         })
     } catch (e) {
         console.log(e.response.status)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении нового проекта', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении нового проекта', type: 'error' } })
     }
 }
 export function* removeProjectSaga(action) {
@@ -52,7 +52,7 @@ export function* removeProjectSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при удалении проекта', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при удалении проекта', type: 'error' } })
     }
 }
 
@@ -68,7 +68,7 @@ export function* updateProjectSaga(action) {
         }
     } catch (e) {
         console.log(e)
-        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при изменении проекта', type: 'danger' } })
+        yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при изменении проекта', type: 'error' } })
     }
 }
 // export function* addUserToProjectSaga(action) {
@@ -82,7 +82,7 @@ export function* updateProjectSaga(action) {
 //         }
 //     } catch (e) {
 //         console.log(e)
-//         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении пользователя', type: 'danger' } })
+//         yield put({ type: TYPES.SHOW_ALERT, payload: { text: 'Возникла ошибка при добавлении пользователя', type: 'error' } })
 //     }
 // }
 
